@@ -1,0 +1,4 @@
+<div class="jumbotron">
+  <h2>Welcome to Credo Server!</h2>
+  <p class="lead">A web server for running Credo on GitHub Pull Requests.</p>
+</div>

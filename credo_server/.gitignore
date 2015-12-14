@@ -1,5 +1,6 @@
+/*.ez
 /_build
-/deps
 /config/prod.secret.exs
+/db
+/deps
 erl_crash.dump
-*.ez

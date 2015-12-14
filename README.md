@@ -1,2 +1,3 @@
 # credo-server
-Credo Server
+
+Server for running Credo on Github Pull Requests.

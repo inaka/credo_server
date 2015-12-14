@@ -1,2 +1,3 @@
-# credo-server
-Credo Server
+# CredoServer
+
+Server for Credo

@@ -1,5 +1,8 @@
 defmodule CredoServer.User do
   use CredoServer.Web, :model
+  
+  import Ecto.Query
+  alias CredoServer.Repo
 
   schema "users" do
     field :name, :string
@@ -26,5 +29,24 @@ defmodule CredoServer.User do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+  end
+
+  @doc """
+  Gets an user that matches with the given `token` and token hasn't expired.
+  """
+  def find_by_auth_token(token) do
+    now = Ecto.DateTime.utc
+    users =
+      from(u in CredoServer.User)
+        |> where([u], u.auth_token == ^token and u.auth_expires > ^now)
+        |> Repo.all
+
+    case users do
+      [one] -> one
+      []    -> nil
+      other -> raise Ecto.MultipleResultsError,
+                     queryable: CredoServer.User,
+                     count: length(other)
+    end
   end
 end

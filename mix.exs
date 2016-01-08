@@ -16,8 +16,16 @@ defmodule CredoServer.Mixfile do
   # Configuration for the OTP application.
   def application do
     [mod: {CredoServer, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex]]
+     applications: [
+      :phoenix,
+      :phoenix_html,
+      :cowboy,
+      :logger,
+      :phoenix_ecto,
+      :postgrex,
+      :tentacat
+     ]
+    ]
   end
 
   # Specifies which paths to compile per environment.
@@ -31,7 +39,8 @@ defmodule CredoServer.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 2.1"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:tentacat, "~> 0.3.1"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

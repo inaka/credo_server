@@ -2,7 +2,7 @@ defmodule CredoServer.Repository do
   use CredoServer.Web, :model
 
   schema "repositories" do
-    belongs_to :user_id, CredoServer.User
+    belongs_to :user, CredoServer.User
     field :github_id, :integer
     field :name, :string
     field :full_name, :string

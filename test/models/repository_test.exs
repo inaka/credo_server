@@ -3,7 +3,14 @@ defmodule CredoServer.RepoTest do
 
   alias CredoServer.Repository
 
-  @valid_attrs %{full_name: "some content", github_id: 42, html_url: "some content", name: "some content", private: true, status: "some content"}
+  @valid_attrs %{
+    full_name: "some content",
+    github_id: 42,
+    html_url: "some content",
+    name: "some content",
+    private: true,
+    status: "some content"
+  }
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

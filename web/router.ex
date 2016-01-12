@@ -11,6 +11,6 @@ defmodule CredoServer.Router do
 
     resources "/repos", RepositoryController
 
-    get "/test", TestController, :show
+    get "/status", StatusController, :show
   end
 end

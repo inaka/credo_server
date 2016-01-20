@@ -19,5 +19,3 @@ COPY . /myapp
 
 RUN mix deps.get
 RUN mix
-
-#COPY build/sys.config _rel/elvis_server/releases/0.1.0/sys.config

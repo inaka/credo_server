@@ -32,5 +32,5 @@ config :credo_server, CredoServer.Repo,
   username: "postgres",
   password: "postgres",
   database: "credo_server_dev",
-  hostname: "localhost",
+  hostname: "db",
   pool_size: 10

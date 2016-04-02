@@ -30,7 +30,7 @@ defmodule CredoServer.AuthController do
 
     conn
     |> put_session(:user, %{token: user.auth_token})
-    |> redirect(to: home_path(conn, :index))
+    |> redirect(to: repository_path(conn, :index))
   end
 
   def logout(conn, _params) do

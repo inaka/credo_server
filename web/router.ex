@@ -14,7 +14,7 @@ defmodule CredoServer.Router do
     get "/auth", AuthController, :index
     post  "/auth/oauth/login", AuthController, :login
     get   "/auth/oauth/callback", AuthController, :callback
-    post  "/auth/oauth/logout", AuthController, :logout
+    get   "/auth/oauth/logout", AuthController, :logout
   end
 
   pipeline :api do

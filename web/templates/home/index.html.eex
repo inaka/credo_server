@@ -2,6 +2,6 @@
 
 <br></br>
 <span>
-  <button>Repos</button>
+  <%= link("Repos", to: repository_path(@conn, :index)) %>
   <%= button("Logout", to: auth_path(@conn, :logout)) %>
 </span>

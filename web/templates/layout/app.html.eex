@@ -12,16 +12,28 @@
   </head>
 
   <body>
-    <div class="container" role="main">
-      <div class="header">
+    <div id="content">
+
+      <div id="header">
+        <ul class="menu">
+          <%= if Map.has_key?(@conn.assigns, :user) do %>
+          <li><a href="<%= auth_path(@conn, :logout) %>">Log Out</a></li>
+          <li><a href="<%= repository_path(@conn, :index) %>">Repos</a></li>
+          <%= end %>
+        </ul>
+        <div class="name">
+          <h1>Credo</h1>
+          <blockquote>You ain't nothing but a hound dog...</blockquote>
+        </div>
       </div>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <div id="content-body">
+        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
-      <%= @inner %>
-
-    </div> <!-- /container -->
+        <%= @inner %>
+      </div>
+    </div>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

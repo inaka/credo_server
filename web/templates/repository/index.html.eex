@@ -1,3 +1,13 @@
 <h2>Public Repositories</h2>
 <div class="repos section">
+
+  <%= for repo <- @public_repos do %>
+    <div>
+      <button class="toggle <%= repo["status"] %>">
+        On/Off
+      </button>
+      <a href="<%= repo["html_url"] %>" target="_blank"><%= repo["full_name"] %></a>
+    </div>
+  <% end %>
+
 </div>

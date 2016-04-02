@@ -78,6 +78,17 @@ defmodule CredoServer.User do
       user
   end
 
+  def get_repos(model) do
+    client = Tentacat.Client.new(%{access_token: model.github_token})
+    Tentacat.Repositories.list_mine(client)
+  end
+
+  def public_repos(model) do
+    model
+    |> get_repos
+    |> Enum.filter(fn(repo) -> not repo["private"] end)
+  end
+
   # Private
 
   defp new_auth_token do

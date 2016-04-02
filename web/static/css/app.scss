@@ -1,0 +1,243 @@
+a img, :link img, :visited img { border:none; }
+table {border-collapse: collapse; }
+input,button,select,textarea {font-family: inherit;}
+input, select { vertical-align:middle; }
+ul { margin: 0px; padding: 0px; }
+ul li { list-style: none; background: none; }
+p { margin: 0px; padding: 5px 0px; }
+
+pre {
+    background: #CCC;
+    border-radius: 10px;
+    padding: 5px 5px;
+}
+
+.clearBoth { /* For clearing floats */
+    clear: both;
+    height: 0px;
+    margin: 0;
+    padding: 0;
+    font-size: 0%;
+    line-height: 0px;
+}
+
+.hiddenContent { /* For alternate content for screen readers */
+    position: absolute;
+    left: 0px;
+    top: -2000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+body {
+    text-align: center;
+}
+
+hr {
+    display: none;
+}
+
+@font-face {
+    font-family: 'Museo500';
+    src: url('../fonts/museo500-regular-webfont.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+a {color: #AAAAAA; text-decoration: none; }
+a:hover { color: #AAAAAA; text-decoration: underline; }
+a:visited { color: #AAAAAA; text-decoration: none; }
+
+blockquote {
+    font-size: 20px;
+    color: #AAAAAA;
+    font-style: italic;
+}
+
+#content {
+    background: transparent;
+    text-align: left;
+    display: block;
+    margin: 20px auto;
+    float: none;
+    padding: 20px;
+    width: 700px;
+}
+
+#content-body {
+    padding: 10px;
+}
+
+#header {
+    border-bottom: 1px solid #999;
+    margin: 0 0 10px;
+    padding-bottom: 10px;
+    height: auto;
+}
+
+#header img {
+    width: auto;
+    float: left;
+    margin-right: 10px;
+}
+
+#header img {
+    height: 90px;
+}
+
+#header ul.menu li {
+    float: right;
+    font-size: 1.2em;
+}
+
+@media screen and (min-width: 768px) {
+    #header .name h1 {
+        margin: 0px 0px 10px 0px;
+        padding: 15px;
+        font-size: 40px;
+        line-height: 35px;
+    }
+    #header .name blockquote {
+        padding-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #header {
+        margin-top: 20px;
+    }
+
+    #content {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    #header img {
+        display: none;
+    }
+}
+
+button {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+
+    border: 2px solid #AAAAAA;
+    background: #FFFFFF;
+    font-size: 18px;
+    color:#AAAAAA;
+    cursor: pointer;
+}
+
+.section button {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+
+    font-size: 12px;
+    background: #333;
+    margin: 5px 5px;
+    border: 0px;
+    padding: 5px 10px;
+    width: 60px;
+    text-align: center;
+}
+
+.section button.subscribe {
+    width: 80px;
+    color: #FF0;
+    text-shadow: -1px 0 #660, 0 1px #660, 1px 0 #660, 0 -1px #660;
+}
+
+.section img.more-info {
+    height: 1.3em;
+    border: 0px;
+    cursor: pointer;
+}
+
+#content button.toggle.loading {
+    -webkit-animation: loading 1.3s infinite;
+    -webkit-animation-delay: 0.2s;
+      animation: dot 1.3s infinite;
+      animation-delay: 0.2s;
+}
+
+@-webkit-keyframes loading {
+      0% { color: #00FF00; }
+     50% { color: #999; }
+    100% { color: #00FF00; }
+}
+
+#content button.toggle.off{
+    color: #CCC;
+    text-shadow: -1px 0 #666, 0 1px #666, 1px 0 #666, 0 -1px #666;
+}
+
+#content button.toggle.on{
+    color: #0F0;
+    font-weight: bold;
+    text-shadow: -1px 0 #090, 0 1px #090, 1px 0 #090, 0 -1px #090;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Museo500', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+}
+
+#container {
+    font-family: 'Museo500', sans-serif;
+    font-size: 106%;
+    line-height: 1.31em;
+    /* width: 960px; */
+    background: #fff;
+    margin: 0 auto 0 auto;
+    padding: 0px 10px;
+}
+
+#header .name blockquote {
+    font-size: 18px;
+    font-family: 'Museo500', sans-serif;
+}
+
+#content h1 {
+    font-size: 24px;
+}
+
+#content h2.public-repos {
+   padding-top: 5px;
+}
+
+#content h2 {
+   padding-top: 20px;
+}
+
+#content .section a { color: #333333; }
+#content .section a:hover { color: #333333; text-decoration: underline; }
+#content .section a:visited { color: #666666; text-decoration: none; }
+
+#login {
+    border: 3px solid #AAAAAA;
+    font-size: 14px;
+}
+
+#content ol.steps li {
+    margin: 10px 30px;
+}
+
+#footer {
+    margin: 0px;
+    padding : 0px;
+    border: 0px;
+    text-align: center;
+}
+
+#sync {
+    float:right;
+}
+
+#sync.loading {
+    background: url('/assets/img/loading.gif') center no-repeat;
+    color: #DDD;
+}

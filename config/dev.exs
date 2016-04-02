@@ -32,5 +32,10 @@ config :credo_server, CredoServer.Repo,
   username: "postgres",
   password: "postgres",
   database: "credo_server_dev",
-  hostname: "db",
+  hostname: "localhost",
   pool_size: 10
+
+#TODO move to os env variables
+config :credo_server, :github_client_id, "4818aa2f7fbc1234a086"
+config :credo_server, :github_client_secret, "805bca159c281dcda265eb9786d16712ba0efca5"
+config :credo_server, :github_scope, "repo,user:email"

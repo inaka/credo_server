@@ -1,0 +1,7 @@
+<h2>Credo</h2>
+
+<br></br>
+<span>
+  <button>Repos</button>
+  <%= button("Logout", to: auth_path(@conn, :logout)) %>
+</span>

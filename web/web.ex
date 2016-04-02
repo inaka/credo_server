@@ -21,7 +21,6 @@ defmodule CredoServer.Web do
   def controller do
     quote do
       use Phoenix.Controller
-      use CredoServer.Plug.Auth
 
       alias CredoServer.Repo
       import Ecto.Model

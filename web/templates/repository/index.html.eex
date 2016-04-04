@@ -3,10 +3,8 @@
 
   <%= for repo <- @public_repos do %>
     <div>
-      <button class="toggle <%= repo["status"] %>">
-        On/Off
-      </button>
-      <a href="<%= repo["html_url"] %>" target="_blank"><%= repo["full_name"] %></a>
+      <%= button("On/Off", to: repository_repository_path(@conn, :on, repo), form: [class: "toggle"], class: "toggle " <> repo.status) %>
+      <%= link(repo.full_name, to: repo.html_url, target: "_blank") %>
     </div>
   <% end %>
 

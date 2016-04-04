@@ -39,3 +39,4 @@ config :credo_server, CredoServer.Repo,
 config :credo_server, :github_client_id, "4818aa2f7fbc1234a086"
 config :credo_server, :github_client_secret, "805bca159c281dcda265eb9786d16712ba0efca5"
 config :credo_server, :github_scope, "repo,user:email"
+config :credo_server, :webhook_url, "http://1e9f5a98.ngrok.io/webhook"

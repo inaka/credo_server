@@ -9,6 +9,15 @@ defmodule CredoServer.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :external do
+    plug :accepts, ["html"]
+  end
+
+  scope "/", CredoServer do
+    pipe_through :external
+    post "/webhook", RepositoryController, :webhook
+  end
+
   scope "/", CredoServer do
     pipe_through :browser
     get "/auth", AuthController, :index
@@ -26,7 +35,10 @@ defmodule CredoServer.Router do
     pipe_through :browser
     pipe_through :api
 
-    get "/repos", RepositoryController, :index
+    resources "/repos", RepositoryController, only: [:index] do
+      post "/on", RepositoryController, :on
+      post "/off", RepositoryController, :off
+    end
 
     get "/test", TestController, :show
     get "/",  HomeController, :index

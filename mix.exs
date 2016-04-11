@@ -5,6 +5,7 @@ defmodule CredoServer.Mixfile do
     [app: :credo_server,
      version: "0.0.1",
      elixir: "~> 1.2",
+     elixirc_paths: ["lib", "web"],
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps]

@@ -7,7 +7,7 @@ defmodule CredoServer.Router do
 
   # Root path
   get "/" do
-    send_resp(conn, 200, "Running without phoenix!")
+    CredoServer.HomeController.index(conn)
   end
 
   match _ do

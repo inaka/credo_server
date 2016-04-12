@@ -1,29 +1,30 @@
 # This file is responsible for configuring your application
 # and its dependencies with the aid of the Mix.Config module.
-#
-# This configuration file is loaded before any dependency and
-# is restricted to this project.
 use Mix.Config
 
-# Configures the endpoint
-config :credo_server, CredoServer.Endpoint,
-  url: [host: "localhost"],
-  root: Path.dirname(__DIR__),
-  secret_key_base: "It52NmHIwHmeIeLOK+0kLHVi5rZNM/p9wRshzQtvBFhRzU9LK79YexZoisYKdzMO",
-  render_errors: [accepts: ~w(html json)],
-  pubsub: [name: CredoServer.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+# This configuration is loaded before any dependency and is restricted
+# to this project. If another project depends on this project, this
+# file won't be loaded nor affect the parent project. For this reason,
+# if you want to provide default values for your application for
+# 3rd-party users, it should be done in your "mix.exs" file.
 
-# Configures Elixir's Logger
-config :logger, :console,
-  format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+# You can configure for your application as:
+#
+#     config :credo_server, key: :value
+#
+# And access this configuration in your application as:
+#
+#     Application.get_env(:credo_server, :key)
+#
+# Or configure a 3rd-party app:
+#
+#     config :logger, level: :info
+#
 
-# Import environment specific config. This must remain at the bottom
-# of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
-
-# Configure phoenix generators
-config :phoenix, :generators,
-  migration: true,
-  binary_id: false
+# It is also possible to import configuration files, relative to this
+# directory. For example, you can emulate configuration per environment
+# by uncommenting the line below and defining dev.exs, test.exs and such.
+# Configuration from the imported file will override the ones defined
+# here (which is why it is important to import them last).
+#
+#     import_config "#{Mix.env}.exs"

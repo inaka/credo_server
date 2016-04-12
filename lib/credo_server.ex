@@ -1,4 +1,6 @@
 defmodule CredoServer do
+  @moduledoc false
+
   use Application
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
@@ -9,7 +11,9 @@ defmodule CredoServer do
     children = [
       # Define workers and child supervisors to be supervised
       # worker(CredoServer.Worker, [arg1, arg2, arg3]),
-      worker(__MODULE__, [], function: :run)
+      worker(__MODULE__, [], function: :run),
+      # Start the Ecto repository
+      worker(CredoServer.Repo, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
@@ -19,6 +23,6 @@ defmodule CredoServer do
   end
 
   def run do
-    { :ok, _ } = Plug.Adapters.Cowboy.http CredoServer.Router, []
+    {:ok, _} = Plug.Adapters.Cowboy.http(CredoServer.Router, [])
   end
 end

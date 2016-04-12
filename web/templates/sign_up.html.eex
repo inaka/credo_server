@@ -1,0 +1,21 @@
+<h2>Credo</h2>
+
+Credo is a style checker for Elixire.
+
+<ol class="steps">
+  <li>
+    <form action="/oauth/login" method="post">
+      <input type="submit" value="Sign in with Github">
+    </form>
+  </li>
+  <li>
+    Activate Credo for your GitHub repositories.
+  </li>
+  <li>
+    When pull requests are created or modified Credo will review your code and
+    add comments to it.
+  </li>
+  <li>
+    Check the comments and fix your code accordingly.
+  </li>
+</ol>

@@ -33,7 +33,7 @@ defmodule CredoServer.AuthController do
     body = "<html><body>You are being redirected</body></html>"
     conn
     |> put_session(:user, %{token: user.auth_token})
-    |> put_resp_header("location", "/")
+    |> put_resp_header("location", "/repos")
     |> put_resp_content_type("text/html")
     |> send_resp(conn.status || 302, body)
   end

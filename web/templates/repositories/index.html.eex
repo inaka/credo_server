@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="/css/app.css">
+
+<h2>Public Repositories</h2>
+<div class="repos section">
+
+  <%= for repo <- public_repos do %>
+    <div class="repo-info">
+      <button class="repo-btn <%= repo.status%>">On/Off</button>
+      <a href="<%= repo.html_url %>"><%= repo.full_name %></a>
+    </div>
+  <% end %>
+
+</div>

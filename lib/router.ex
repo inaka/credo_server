@@ -41,6 +41,21 @@ defmodule CredoServer.Router do
     RepositoriesController.index(conn)
   end
 
+  post "/repos/:repository_id/add_webhook" do
+    conn = check_user(conn)
+    RepositoriesController.add_webhook(conn, repository_id)
+  end
+
+  post "/repos/:repository_id/remove_webhook" do
+    conn = check_user(conn)
+    RepositoriesController.remove_webhook(conn, repository_id)
+  end
+
+  # Route for the events from github
+  post "/webhook" do
+    RepositoriesController.webhook(conn)
+  end
+
   get "/auth" do
     AuthController.index(conn)
   end

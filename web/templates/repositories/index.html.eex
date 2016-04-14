@@ -5,7 +5,9 @@
 
   <%= for repo <- public_repos do %>
     <div class="repo-info">
-      <button class="repo-btn <%= repo.status%>">On/Off</button>
+      <form action="repos/<%= repo.id %>/<%= CredoServer.Repository.toggle_action_rul(repo) %>" class="add-remove-hook-form" method="post">
+        <button class="repo-btn <%= repo.status%>">On/Off</button>
+      </form>
       <a href="<%= repo.html_url %>"><%= repo.full_name %></a>
     </div>
   <% end %>

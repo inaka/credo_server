@@ -15,7 +15,8 @@ defmodule CredoServer.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger],
+    [applications: [:logger, :httpoison, :postgrex,
+                    :ecto, :tentacat, :plug],
      mod: {CredoServer, []}]
   end
 
@@ -30,6 +31,14 @@ defmodule CredoServer.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [{:cowboy, "~> 1.0.0"},
-     {:plug, "~> 1.0"}]
+     {:plug, "~> 1.0"},
+     {:poison, "~> 2.0"},
+     {:httpoison, "~> 0.8.0"},
+     {:postgrex, ">= 0.0.0"},
+     {:ecto, "~> 2.0.0-beta"},
+     {:tentacat, "~> 0.2"},
+     {:secure_random, "~> 0.2"},
+     {:credo, "~> 0.3", only: [:dev, :test]}
+   ]
   end
 end

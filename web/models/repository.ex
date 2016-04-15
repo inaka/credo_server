@@ -26,9 +26,7 @@ defmodule CredoServer.Repository do
   end
 
   def webhook_status(repository_response, user) do
-    credo_webhook = credo_webhook(user, repository_response["name"])
-
-    case credo_webhook do
+    case credo_webhook(user, repository_response["name"]) do
       nil -> "off"
       _ -> "on"
     end
@@ -57,11 +55,11 @@ defmodule CredoServer.Repository do
     end
   end
 
-  def toggle_action_rul(%Repository{status: "on"}) do
-    "remove_webhook"
+  def action_method(%Repository{status: "on"}) do
+    "delete"
   end
-  def toggle_action_rul(%Repository{status: "off"}) do
-    "add_webhook"
+  def action_method(%Repository{status: "off"}) do
+    "post"
   end
 
   # Private

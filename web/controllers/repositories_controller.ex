@@ -2,6 +2,7 @@ defmodule CredoServer.RepositoriesController do
   @moduledoc false
 
   import Plug.Conn
+  import CredoServer.RouterHelper
   require EEx
   require Ecto.Query
 
@@ -29,11 +30,7 @@ defmodule CredoServer.RepositoriesController do
 
      case Repository.add_webhook(repository, user) do
        :ok ->
-         body = "<html><body>You are being redirected</body></html>"
-         conn
-         |> put_resp_header("location", "/repos")
-         |> put_resp_content_type("text/html")
-         |> send_resp(conn.status || 302, body)
+         redirect(conn, to: "/repos")
        :error ->
          send_resp(conn, 422, "There was a problem adding the webhook")
      end
@@ -44,16 +41,11 @@ defmodule CredoServer.RepositoriesController do
      repository = Repo.get(Repository, repository_id)
      Repository.remove_webhook(repository, user)
 
-     body = "<html><body>You are being redirected</body></html>"
-     conn
-     |> put_resp_header("location", "/repos")
-     |> put_resp_content_type("text/html")
-     |> send_resp(conn.status || 302, body)
+     redirect(conn, to: "/repos")
   end
 
   def webhook(conn) do
-    {:ok, body, _} = read_body(conn)
-    {:ok, response_body} = Poison.decode(body)
+    response_body = conn.body_params
     repo = Repo.get_by(Repository, full_name: response_body["repository"]["full_name"])
     IO.inspect "webhook for => " <> repo.full_name
 

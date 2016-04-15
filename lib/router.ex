@@ -7,10 +7,18 @@ defmodule CredoServer.Router do
 
   alias CredoServer.RepositoriesController
   alias CredoServer.AuthController
+  import CredoServer.RouterHelper
 
   plug Plug.Static,
     at: "/",
     from: :credo_server
+
+  plug Plug.Parsers,
+    parsers: [:urlencoded, :multipart, :json],
+    pass: ["*/*"],
+    json_decoder: Poison
+
+  plug Plug.MethodOverride
 
   plug Plug.Logger, log: :debug
 
@@ -22,32 +30,25 @@ defmodule CredoServer.Router do
 
   plug :add_secret_key
   plug :fetch_session
+  plug :check_user
   plug :match
   plug :dispatch
 
   # Root path
   get "/" do
-    check_user(conn)
-    body = "<html><body>You are being redirected</body></html>"
-    conn
-    |> put_resp_header("location", "/repos")
-    |> put_resp_content_type("text/html")
-    |> send_resp(conn.status || 302, body)
+    redirect(conn, to: "/repos")
   end
 
   # Root path
   get "/repos" do
-    conn = check_user(conn)
     RepositoriesController.index(conn)
   end
 
-  post "/repos/:repository_id/add_webhook" do
-    conn = check_user(conn)
+  post "/repos/:repository_id/webhook" do
     RepositoriesController.add_webhook(conn, repository_id)
   end
 
-  post "/repos/:repository_id/remove_webhook" do
-    conn = check_user(conn)
+  delete "/repos/:repository_id/webhook" do
     RepositoriesController.remove_webhook(conn, repository_id)
   end
 
@@ -60,7 +61,7 @@ defmodule CredoServer.Router do
     AuthController.index(conn)
   end
 
-  post "/oauth/login" do
+  post "/auth/oauth/login" do
     AuthController.login(conn)
   end
 

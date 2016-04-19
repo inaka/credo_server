@@ -4,7 +4,7 @@ Credo is a style checker for Elixire.
 
 <ol class="steps">
   <li>
-    <form action="/oauth/login" method="post">
+    <form action="auth/oauth/login" method="post">
       <input type="submit" value="Sign in with Github">
     </form>
   </li>

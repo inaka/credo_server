@@ -1,6 +1,9 @@
 defmodule CredoServer.Repository do
   use Ecto.Schema
   import Ecto.Changeset
+  alias CredoServer.Repo
+  alias CredoServer.Repository
+  alias CredoServer.User
 
   schema "repositories" do
     belongs_to :user, CredoServer.User
@@ -23,27 +26,70 @@ defmodule CredoServer.Repository do
   end
 
   def webhook_status(repository_response, user) do
-    hooks = webhooks(user, repository_response)
-    credo_webhook =
-      Enum.find(hooks, fn(hook) ->
-        hook["config"]["url"] == Application.get_env(:credo_server, :webhook_url)
-      end)
-
-    case credo_webhook do
+    case credo_webhook(user, repository_response["name"]) do
       nil -> "off"
       _ -> "on"
     end
   end
 
+  def add_webhook(repository, user) do
+     client = User.tentacat_client(user)
+     case Tentacat.Hooks.create(user.username, repository.name, new_hook_body, client) do
+       {201, _} ->
+         repo_change = Ecto.Changeset.change(repository, status: "on")
+         Repo.update(repo_change)
+         :ok
+       _ ->
+         :error
+     end
+  end
+
+  def remove_webhook(repository, user) do
+    credo_webhook = credo_webhook(user, repository.name)
+
+    if credo_webhook do
+      client = User.tentacat_client(user)
+      Tentacat.Hooks.remove(user.username, repository.name, credo_webhook["id"], client)
+      repo_change = Ecto.Changeset.change(repository, status: "off")
+      Repo.update(repo_change)
+    end
+  end
+
+  def action_method(%Repository{status: "on"}) do
+    "delete"
+  end
+  def action_method(%Repository{status: "off"}) do
+    "post"
+  end
+
   # Private
 
-  defp webhooks(user, repository_response) do
-    client = Tentacat.Client.new(%{access_token: user.github_token})
-    case Tentacat.Hooks.list(user.username, repository_response["name"], client) do
+  defp credo_webhook(user, repository_name) do
+    hooks = webhooks(user, repository_name)
+    Enum.find(hooks, fn(hook) ->
+      hook["config"]["url"] == Application.get_env(:credo_server, :webhook_url)
+    end)
+  end
+
+  defp webhooks(user, repository_name) do
+    client = User.tentacat_client(user)
+    case Tentacat.Hooks.list(user.username, repository_name, client) do
       hooks when is_list(hooks) ->
         hooks
       _ ->
         []
     end
+  end
+
+  defp new_hook_body() do
+    %{
+      "name" => "web",
+      "active" => true,
+      "events" => ["pull_request"],
+      "config" => %{
+        "url" => Application.get_env(:credo_server, :webhook_url),
+        "content_type" => "json"
+      }
+    }
   end
 end

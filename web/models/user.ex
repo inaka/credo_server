@@ -103,6 +103,18 @@ defmodule CredoServer.User do
     Repo.insert(user_changeset)
   end
 
+  def public_repos(user) do
+    user
+    |> get_repos
+    |> Enum.filter(fn(repo) -> not repo["private"] end)
+  end
+
+  def tentacat_client(user) do
+    Tentacat.Client.new(%{access_token: user.github_token})
+  end
+
+  # Private
+
   defp update_token(user) do
     user_changeset = change(user,
                             auth_token: new_auth_token,
@@ -110,14 +122,8 @@ defmodule CredoServer.User do
     Repo.update(user_changeset)
   end
 
-  def public_repos(user) do
-    user
-    |> get_repos
-    |> Enum.filter(fn(repo) -> not repo["private"] end)
-  end
-
   defp get_repos(user) do
-    client = Tentacat.Client.new(%{access_token: user.github_token})
+    client = tentacat_client(user)
     Tentacat.Repositories.list_mine(client)
   end
 

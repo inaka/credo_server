@@ -3,11 +3,19 @@ defmodule CredoServer.Plug.Auth do
 
   import Plug.Conn
 
-  def check_user(conn) do
-    check_session(conn, get_session(conn, :user))
+  def check_user(conn, _) do
+    if needs_auth_check(conn) do
+      conn = check_session(conn, get_session(conn, :user))
+    end
+
+    conn
   end
 
   # Private
+
+  defp needs_auth_check(conn) do
+    conn.path_info == [] or hd(conn.path_info) == "repos"
+  end
 
   defp check_session(conn, nil) do
     redirect_to_auth(conn)

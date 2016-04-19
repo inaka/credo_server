@@ -10,3 +10,7 @@ button.repo-btn.on{
 .repo-info{
   padding: 3px;
 }
+
+.add-remove-hook-form{
+  display: inline-table;
+}

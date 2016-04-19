@@ -2,6 +2,7 @@ defmodule CredoServer.AuthController do
   @moduledoc false
 
   import Plug.Conn
+  import CredoServer.RouterHelper
 
   require EEx
   EEx.function_from_file :def, :sing_up, "web/templates/sign_up.html.eex"
@@ -18,11 +19,7 @@ defmodule CredoServer.AuthController do
     query_params = "client_id=#{github_client_id}&scope=#{github_scope}"
     login_url = "https://github.com/login/oauth/authorize?#{query_params}"
 
-    body = "<html><body>You are being redirected</body></html>"
-    conn
-    |> put_resp_header("location", login_url)
-    |> put_resp_content_type("text/html")
-    |> send_resp(conn.status || 302, body)
+    redirect(conn, to: login_url)
   end
 
   def callback(conn) do
@@ -30,12 +27,9 @@ defmodule CredoServer.AuthController do
     access_token = get_github_access_token(conn.query_params["code"])
     user = CredoServer.User.save(access_token)
 
-    body = "<html><body>You are being redirected</body></html>"
     conn
     |> put_session(:user, %{token: user.auth_token})
-    |> put_resp_header("location", "/repos")
-    |> put_resp_content_type("text/html")
-    |> send_resp(conn.status || 302, body)
+    |> redirect(to: "/repos")
   end
 
   # Private

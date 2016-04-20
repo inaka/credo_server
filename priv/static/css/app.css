@@ -1,0 +1,16 @@
+button.repo-btn{
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.repo-btn.on{
+  color: #0F0;
+}
+
+.repo-info{
+  padding: 3px;
+}
+
+.add-remove-hook-form{
+  display: inline-table;
+}

@@ -5,8 +5,20 @@ defmodule CredoServer.Router do
   import CredoServer.Plug.AddSecretKey
   import CredoServer.Plug.Auth
 
-  alias CredoServer.HomeController
+  alias CredoServer.RepositoriesController
   alias CredoServer.AuthController
+  import CredoServer.RouterHelper
+
+  plug Plug.Static,
+    at: "/",
+    from: :credo_server
+
+  plug Plug.Parsers,
+    parsers: [:urlencoded, :multipart, :json],
+    pass: ["*/*"],
+    json_decoder: Poison
+
+  plug Plug.MethodOverride
 
   plug Plug.Logger, log: :debug
 
@@ -18,20 +30,38 @@ defmodule CredoServer.Router do
 
   plug :add_secret_key
   plug :fetch_session
+  plug :check_user
   plug :match
   plug :dispatch
 
   # Root path
   get "/" do
-    check_user(conn)
-    HomeController.index(conn)
+    redirect(conn, to: "/repos")
+  end
+
+  # Root path
+  get "/repos" do
+    RepositoriesController.index(conn)
+  end
+
+  post "/repos/:repository_id/webhook" do
+    RepositoriesController.add_webhook(conn, repository_id)
+  end
+
+  delete "/repos/:repository_id/webhook" do
+    RepositoriesController.remove_webhook(conn, repository_id)
+  end
+
+  # Route for the events from github
+  post "/webhook" do
+    RepositoriesController.webhook(conn)
   end
 
   get "/auth" do
     AuthController.index(conn)
   end
 
-  post "/oauth/login" do
+  post "/auth/oauth/login" do
     AuthController.login(conn)
   end
 

@@ -72,6 +72,14 @@ defmodule CredoServer.User do
   def sync_repositories(user) do
     Repo.delete_all Ecto.assoc(user, :repositories)
     public_repos = User.public_repos(user)
+    create_user_repos(user, public_repos)
+    user_change = Ecto.Changeset.change(user, synced_at: Ecto.DateTime.utc)
+    Repo.update(user_change)
+  end
+
+  # Private
+
+  defp create_user_repos(user, public_repos) do
     Enum.map(public_repos, fn(repo) ->
       status = Repository.webhook_status(repo, user)
 
@@ -82,11 +90,7 @@ defmodule CredoServer.User do
 
       Repo.insert(repo)
     end)
-    user_change = Ecto.Changeset.change(user, synced_at: Ecto.DateTime.utc)
-    Repo.update(user_change)
   end
-
-  # Private
 
   defp create_user(client, github_user, token) do
     emails = Tentacat.Users.Emails.list(client)

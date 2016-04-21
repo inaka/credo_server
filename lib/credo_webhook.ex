@@ -2,23 +2,29 @@ defmodule CredoServer.CredoWebhook do
   @moduledoc false
 
   alias CredoServer.GithubUtils
+  alias CredoServer.FileUtils
 
-  def handle_pull_request(cred, data, github_files) do
+  def handle_pull_request(cred, pr_data, github_files) do
+    repository_info = pr_data["repository"]
+    repository_path = FileUtils.create_repository_dir(repository_info)
+
     errors =
       Enum.map(github_files, fn(github_file) ->
-        run_credo(cred, data, github_file)
+        run_credo(cred, repository_info, github_file)
       end)
+
+    FileUtils.delete_repository_dir(repository_path)
 
     {:ok, List.flatten(errors)}
   end
 
   # Private
 
-  defp run_credo(cred, data, github_file) do
-    path = create_content_file(cred, data, github_file)
+  defp run_credo(cred, repository_info, github_file) do
+    file_path = create_content_file(cred, repository_info, github_file)
 
-    config = Credo.Config.read_or_default(path)
-    case Credo.CLI.Command.Suggest.run(path, config) do
+    config = Credo.Config.read_or_default(file_path)
+    case Credo.CLI.Command.Suggest.run(file_path, config) do
       {:error, errors} ->
         create_github_errors_messages(errors, github_file)
       _ ->
@@ -26,17 +32,18 @@ defmodule CredoServer.CredoWebhook do
     end
   end
 
-  defp create_content_file(cred, data, github_file) do
-    repository = data["repository"]["full_name"]
+  defp create_content_file(cred, repository_info, github_file) do
     filename = github_file["filename"]
-    path = "#{System.tmp_dir}#{repository}/#{filename}"
-    File.mkdir_p(Path.dirname(path))
+    repository_path = FileUtils.create_repository_dir(repository_info)
+    file_path = "#{repository_path}/#{filename}"
+    File.mkdir_p(Path.dirname(file_path))
 
     commit_id = GithubUtils.commit_id(github_file)
+    repository = repository_info["full_name"]
     {:ok, content} = :egithub.file_content(cred, repository, commit_id, filename)
-    File.write(path, content)
+    File.write(file_path, content)
 
-    path
+    file_path
   end
 
   defp create_github_errors_messages(errors, github_file) do

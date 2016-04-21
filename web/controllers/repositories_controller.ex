@@ -11,6 +11,7 @@ defmodule CredoServer.RepositoriesController do
   alias CredoServer.Repository
   alias CredoServer.User
   alias CredoServer.Repo
+  alias CredoServer.GithubUtils
 
   def index(conn) do
     user = conn.assigns.user
@@ -47,7 +48,13 @@ defmodule CredoServer.RepositoriesController do
   def webhook(conn) do
     response_body = conn.body_params
     repo = Repo.get_by(Repository, full_name: response_body["repository"]["full_name"])
-    IO.inspect "webhook for => " <> repo.full_name
+
+    headers_map = Enum.into(conn.req_headers, %{})
+    request_map = %{headers: headers_map, body: Poison.encode!(response_body)}
+
+    #TODO use event/6
+    cred = GithubUtils.git_credentials()
+    :egithub_webhook.event(CredoServer.CredoWebhook, cred, request_map);
 
     send_resp(conn, :no_content, "")
   end

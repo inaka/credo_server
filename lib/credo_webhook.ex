@@ -9,10 +9,12 @@ defmodule CredoServer.CredoWebhook do
         run_credo(cred, data, github_file)
       end)
 
-      {:ok, List.flatten(errors)}
+    {:ok, List.flatten(errors)}
   end
 
-  def run_credo(cred, data, github_file) do
+  # Private
+
+  defp run_credo(cred, data, github_file) do
     path = create_content_file(cred, data, github_file)
 
     config = Credo.Config.read_or_default(path)
@@ -24,7 +26,7 @@ defmodule CredoServer.CredoWebhook do
     end
   end
 
-  def create_content_file(cred, data, github_file) do
+  defp create_content_file(cred, data, github_file) do
     repository = data["repository"]["full_name"]
     filename = github_file["filename"]
     path = "#{System.tmp_dir}#{repository}/#{filename}"
@@ -37,7 +39,7 @@ defmodule CredoServer.CredoWebhook do
     path
   end
 
-  def create_github_errors_messages(errors, github_file) do
+  defp create_github_errors_messages(errors, github_file) do
     Enum.flat_map(errors, fn(error) ->
       patch = github_file["patch"]
       case GithubUtils.get_relative_position(patch, error.line_no) do

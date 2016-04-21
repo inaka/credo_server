@@ -62,6 +62,11 @@ defmodule CredoServer.Repository do
     "post"
   end
 
+  def get_repository_with_user(repository_name) do
+    repository = Repo.get_by(Repository, full_name: repository_name)
+    Repo.preload(repository, [:user])
+  end
+
   # Private
 
   defp credo_webhook(user, repository_name) do

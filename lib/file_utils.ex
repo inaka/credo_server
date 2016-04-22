@@ -13,7 +13,7 @@ defmodule CredoServer.FileUtils do
     path
   end
 
-  def delete_repository_dir(repository_path) do
-    File.rm_rf(repository_path)
+  def delete_repository_dir(path) do
+    File.rm_rf(path)
   end
 end

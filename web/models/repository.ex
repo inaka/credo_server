@@ -1,4 +1,6 @@
 defmodule CredoServer.Repository do
+  @moduledoc false
+
   use Ecto.Schema
   import Ecto.Changeset
   alias CredoServer.Repo
@@ -26,7 +28,7 @@ defmodule CredoServer.Repository do
   end
 
   def webhook_status(repository_response, user) do
-    case credo_webhook(user, repository_response["name"]) do
+    case get_credo_webhook(user, repository_response["name"]) do
       nil -> "off"
       _ -> "on"
     end
@@ -45,7 +47,7 @@ defmodule CredoServer.Repository do
   end
 
   def remove_webhook(repository, user) do
-    credo_webhook = credo_webhook(user, repository.name)
+    credo_webhook = get_credo_webhook(user, repository.name)
 
     if credo_webhook do
       client = User.tentacat_client(user)
@@ -69,7 +71,7 @@ defmodule CredoServer.Repository do
 
   # Private
 
-  defp credo_webhook(user, repository_name) do
+  defp get_credo_webhook(user, repository_name) do
     hooks = webhooks(user, repository_name)
     Enum.find(hooks, fn(hook) ->
       hook["config"]["url"] == Application.get_env(:credo_server, :webhook_url)

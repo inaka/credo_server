@@ -7,13 +7,9 @@ defmodule CredoServer.RepositoriesController do
   alias CredoServer.GithubUtils
   alias CredoServer.CredoWebhook
 
+  alias CredoServer.Render
   import Plug.Conn
   import CredoServer.RouterHelper
-
-  require EEx
-  EEx.function_from_file(:def, :index_template,
-                         "web/templates/repositories/index.html.eex",
-                         [:public_repositories])
 
   def index(conn) do
     user = conn.assigns.user
@@ -23,8 +19,8 @@ defmodule CredoServer.RepositoriesController do
     repos = Repo.all(query)
 
     conn
-    |> put_resp_content_type("text/html")
-    |> send_resp(200, index_template(repos))
+    |> assign(:public_repositories, repos)
+    |> Render.render(&Render.repositories_index/1)
   end
 
   def add_webhook(conn, repository_id) do

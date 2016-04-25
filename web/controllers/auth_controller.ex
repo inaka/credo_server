@@ -28,6 +28,12 @@ defmodule CredoServer.AuthController do
     |> redirect(to: "/repos")
   end
 
+  def logout(conn) do
+    conn
+    |> delete_session(:user)
+    |> redirect(to: "/")
+  end
+
   # Private
 
   defp get_github_access_token(code) do

@@ -3329,6 +3329,7 @@ blockquote {
     }
     #header .name blockquote {
         padding-bottom: 10px;
+        padding-left: 15px;
     }
 }
 

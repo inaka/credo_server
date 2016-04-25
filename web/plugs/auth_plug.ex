@@ -2,6 +2,7 @@ defmodule CredoServer.Plug.Auth do
   @moduledoc false
 
   import Plug.Conn
+  import CredoServer.RouterHelper
 
   def check_user(conn, _) do
     if needs_auth_check(conn) do
@@ -30,11 +31,8 @@ defmodule CredoServer.Plug.Auth do
   end
 
   defp redirect_to_auth(conn) do
-    body = "<html><body>You are being redirected</body></html>"
     conn
-    |> put_resp_header("location", "/auth")
-    |> put_resp_content_type("text/html")
-    |> send_resp(conn.status || 302, body)
+    |> redirect(to: "/auth")
     |> halt()
   end
 end

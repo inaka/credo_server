@@ -3,7 +3,7 @@
 <h2>Public Repositories</h2>
 <div class="repos section">
 
-  <%= for repo <- public_repos do %>
+  <%= for repo <- public_repositories do %>
     <div class="repo-info">
       <form action="repos/<%= repo.id %>/webhook" class="add-remove-hook-form" method="POST">
         <input name="_method" type="hidden" value="<%= CredoServer.Repository.action_method(repo) %>">

@@ -1,8 +1,8 @@
 defmodule CredoServer.User do
   @moduledoc false
 
-  import Ecto.Query
   import Ecto.Changeset
+  import Ecto.Query
   alias CredoServer.Repo
   alias CredoServer.User
   alias CredoServer.Repository
@@ -71,16 +71,21 @@ defmodule CredoServer.User do
   """
   def sync_repositories(user) do
     Repo.delete_all Ecto.assoc(user, :repositories)
-    public_repos = User.public_repos(user)
-    create_user_repos(user, public_repos)
+    public_repositories = get_public_repositories(user)
+    create_user_repos(user, public_repositories)
     user_change = Ecto.Changeset.change(user, synced_at: Ecto.DateTime.utc)
     Repo.update(user_change)
   end
 
+  def repositories_query(user) do
+    query = Ecto.assoc(user, :repositories)
+    Ecto.Query.order_by(query, [r], r.full_name)
+  end
+
   # Private
 
-  defp create_user_repos(user, public_repos) do
-    Enum.map(public_repos, fn(repo) ->
+  defp create_user_repos(user, public_repositories) do
+    Enum.map(public_repositories, fn(repo) ->
       status = Repository.webhook_status(repo, user)
 
       repo_info = [github_id: repo["id"], name: repo["name"],
@@ -107,17 +112,18 @@ defmodule CredoServer.User do
     Repo.insert(user_changeset)
   end
 
-  def public_repos(user) do
-    user
-    |> get_repos
-    |> Enum.filter(fn(repo) -> not repo["private"] end)
-  end
 
   def tentacat_client(user) do
     Tentacat.Client.new(%{access_token: user.github_token})
   end
 
   # Private
+
+  defp get_public_repositories(user) do
+    user
+    |> get_repositories
+    |> Enum.filter(fn(repository) -> not repository["private"] end)
+  end
 
   defp update_token(user) do
     user_changeset = change(user,
@@ -126,7 +132,7 @@ defmodule CredoServer.User do
     Repo.update(user_changeset)
   end
 
-  defp get_repos(user) do
+  defp get_repositories(user) do
     client = tentacat_client(user)
     Tentacat.Repositories.list_mine(client)
   end

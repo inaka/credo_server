@@ -1,22 +1,25 @@
 defmodule CredoServer.RepositoriesController do
   @moduledoc false
 
-  import Plug.Conn
-  import CredoServer.RouterHelper
-  require EEx
-  require Ecto.Query
-
-  EEx.function_from_file(:def, :index_template, "web/templates/repositories/index.html.eex", [:public_repos])
-
   alias CredoServer.Repository
   alias CredoServer.User
   alias CredoServer.Repo
+  alias CredoServer.GithubUtils
+  alias CredoServer.CredoWebhook
+
+  import Plug.Conn
+  import CredoServer.RouterHelper
+
+  require EEx
+  EEx.function_from_file(:def, :index_template,
+                         "web/templates/repositories/index.html.eex",
+                         [:public_repositories])
 
   def index(conn) do
     user = conn.assigns.user
 
     if (user.synced_at == nil), do: User.sync_repositories(user)
-    query = Ecto.assoc(user, :repositories) |> Ecto.Query.order_by([r], r.full_name)
+    query = User.repositories_query(user)
     repos = Repo.all(query)
 
     conn
@@ -46,8 +49,16 @@ defmodule CredoServer.RepositoriesController do
 
   def webhook(conn) do
     response_body = conn.body_params
-    repo = Repo.get_by(Repository, full_name: response_body["repository"]["full_name"])
-    IO.inspect "webhook for => " <> repo.full_name
+    repository_name = response_body["repository"]["full_name"]
+    repository = Repository.get_repository_with_user(repository_name)
+    repository_user = repository.user
+    status_cred = :egithub.oauth(repository_user.github_token)
+    headers_map = Enum.into(conn.req_headers, %{})
+    request_map = %{headers: headers_map, body: Poison.encode!(response_body)}
+    cred = GithubUtils.git_credentials()
+
+    :egithub_webhook.event(CredoWebhook, status_cred, 'Credo',
+                           'credo', cred, request_map)
 
     send_resp(conn, :no_content, "")
   end

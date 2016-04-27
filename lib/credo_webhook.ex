@@ -7,7 +7,7 @@ defmodule CredoServer.CredoWebhook do
   def handle_pull_request(cred, pr_data, github_files) do
     repository_info = pr_data["repository"]
     repository_path = FileUtils.create_repository_dir(repository_info)
-    add_repository_credo_config(cred, pr_data, repository_path)
+    FileUtils.add_repository_credo_config(cred, pr_data, repository_path)
 
     errors = run_credo(cred, repository_info, github_files)
 
@@ -25,7 +25,7 @@ defmodule CredoServer.CredoWebhook do
   end
 
   defp run_credo(cred, repository_info, github_file) do
-    file_path = create_content_file(cred, repository_info, github_file)
+    file_path = FileUtils.create_content_file(cred, repository_info, github_file)
 
     config = Credo.Config.read_or_default(file_path)
     case Credo.CLI.Command.Suggest.run(file_path, config) do
@@ -34,30 +34,6 @@ defmodule CredoServer.CredoWebhook do
       _ ->
         []
     end
-  end
-
-  defp add_repository_credo_config(cred, pr_data, repository_path) do
-    branch = pr_data["pull_request"]["head"]["ref"]
-    repository_name = pr_data["repository"]["full_name"]
-    case :egithub.file_content(cred, repository_name, branch, ".credo.exs") do
-      {ok, content} ->
-        config_path = "#{repository_path}/.credo.exs"
-        File.write(config_path, content)
-    end
-  end
-
-  defp create_content_file(cred, repository_info, github_file) do
-    filename = github_file["filename"]
-    repository_path = FileUtils.create_repository_dir(repository_info)
-    file_path = "#{repository_path}/#{filename}"
-    File.mkdir_p(Path.dirname(file_path))
-
-    commit_id = GithubUtils.commit_id(github_file)
-    repository = repository_info["full_name"]
-    {:ok, content} = :egithub.file_content(cred, repository, commit_id, filename)
-    File.write(file_path, content)
-
-    file_path
   end
 
   defp create_github_errors_messages(errors, github_file) do

@@ -3,5 +3,4 @@
 /config/prod.secret.exs
 erl_crash.dump
 *.ez
-
 *.log

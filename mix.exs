@@ -9,6 +9,9 @@ defmodule CredoServer.Mixfile do
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      test_coverage: [tool: ExCoveralls],
+     preferred_cli_env: ["coveralls": :test,
+                         "coveralls.detail": :test,
+                         "coveralls.html": :test],
      deps: deps]
   end
 
@@ -41,7 +44,8 @@ defmodule CredoServer.Mixfile do
      {:secure_random, "~> 0.2"},
      {:credo, "~> 0.3", only: [:dev, :test]},
      {:egithub, github: "inaka/erlang-github"},
-     {:excoveralls, "~> 0.4", only: :test}
+     {:excoveralls, "~> 0.4", only: :test},
+     {:exvcr, "~> 0.7", only: :test}
    ]
   end
 end

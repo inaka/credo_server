@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Hello CredoServer!</title>
+    <link rel="stylesheet" href="/css/app.css">
+  </head>
+
+  <body>
+    <div id="content">
+
+      <div id="header">
+        <ul class="menu">
+          <%= if Map.has_key?(assigns, :user) do %>
+          <li><a href="/repos">Repos</a></li>
+          <%= end %>
+        </ul>
+        <div class="name">
+          <h1>Credo</h1>
+          <blockquote>You ain't nothing but a hound dog...</blockquote>
+        </div>
+      </div>
+
+      <div id="content-body">
+        <%= CredoServer.Render.render_template(@view_template, assigns) %>
+      </div>
+    </div>
+  </body>
+</html>

@@ -3,14 +3,10 @@ defmodule CredoServer.AuthController do
 
   import Plug.Conn
   import CredoServer.RouterHelper
-
-  require EEx
-  EEx.function_from_file :def, :sing_up, "web/templates/sign_up.html.eex"
+  alias CredoServer.Render
 
   def index(conn) do
-    conn
-    |> put_resp_content_type("text/html")
-    |> send_resp(200, sing_up)
+    Render.render(conn, &Render.sing_up/1)
   end
 
   def login(conn) do

@@ -48,10 +48,10 @@ defmodule CredoServer.RepositoriesController do
     repository_name = response_body["repository"]["full_name"]
     repository = Repository.get_repository_with_user(repository_name)
     repository_user = repository.user
-    status_cred = :egithub.oauth(repository_user.github_token)
+    status_cred = GithubUtils.oauth(repository_user.github_token)
     headers_map = Enum.into(conn.req_headers, %{})
     request_map = %{headers: headers_map, body: Poison.encode!(response_body)}
-    cred = GithubUtils.git_credentials()
+    cred = GithubUtils.basic_auth()
 
     :egithub_webhook.event(CredoWebhook, status_cred, 'Credo',
                            'credo', cred, request_map)

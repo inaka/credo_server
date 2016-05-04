@@ -13,10 +13,14 @@ defmodule CredoServer.GithubUtils do
     get_relative_position(lines, abs_number, {-1, :undefined})
   end
 
-  def git_credentials() do
+  def basic_auth() do
     user = String.to_char_list(Application.get_env(:credo_server, :github_user))
     password = String.to_char_list(Application.get_env(:credo_server, :github_password))
     :egithub.basic_auth(user, password)
+  end
+
+  def oauth(github_token) do
+    :egithub.oauth(github_token)
   end
 
   # Private

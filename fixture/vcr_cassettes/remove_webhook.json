@@ -1,0 +1,86 @@
+[
+  {
+    "request": {
+      "body": "\"\\\"\\\"\"",
+      "headers": {
+        "User-agent": "tentacat",
+        "Authorization": "token 1c4a58ba3f7bccb7e0d3c93b224fca796c2f4cfd"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.github.com/repos/alemata/credo_test/hooks"
+    },
+    "response": {
+      "body": "[{\"type\":\"Repository\",\"id\":8209433,\"name\":\"web\",\"active\":true,\"events\":[\"pull_request\"],\"config\":{\"content_type\":\"json\",\"url\":\"http://c8562b20.ngrok.io/webhook\"},\"updated_at\":\"2016-04-27T13:51:50Z\",\"created_at\":\"2016-04-27T13:51:50Z\",\"url\":\"https://api.github.com/repos/alemata/credo_test/hooks/8209433\",\"test_url\":\"https://api.github.com/repos/alemata/credo_test/hooks/8209433/test\",\"ping_url\":\"https://api.github.com/repos/alemata/credo_test/hooks/8209433/pings\",\"last_response\":{\"code\":422,\"status\":\"misconfigured\",\"message\":\"Invalid HTTP Response: 404\"}},{\"type\":\"Repository\",\"id\":8274395,\"name\":\"web\",\"active\":true,\"events\":[\"pull_request\"],\"config\":{\"content_type\":\"json\",\"url\":\"http://62f72c52.ngrok.io/webhook\"},\"updated_at\":\"2016-05-03T19:56:33Z\",\"created_at\":\"2016-05-03T19:56:33Z\",\"url\":\"https://api.github.com/repos/alemata/credo_test/hooks/8274395\",\"test_url\":\"https://api.github.com/repos/alemata/credo_test/hooks/8274395/test\",\"ping_url\":\"https://api.github.com/repos/alemata/credo_test/hooks/8274395/pings\",\"last_response\":{\"code\":200,\"status\":\"active\",\"message\":\"OK\"}}]",
+      "headers": {
+        "Server": "GitHub.com",
+        "Date": "Tue, 03 May 2016 20:03:42 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "1086",
+        "Status": "200 OK",
+        "X-RateLimit-Limit": "5000",
+        "X-RateLimit-Remaining": "4977",
+        "X-RateLimit-Reset": "1462308708",
+        "Cache-Control": "private, max-age=60, s-maxage=60",
+        "Vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+        "ETag": "\"50285638c8017249ce23dab33bd4624e\"",
+        "X-OAuth-Scopes": "repo, user:email",
+        "X-Accepted-OAuth-Scopes": "admin:repo_hook, public_repo, read:repo_hook, repo, write:repo_hook",
+        "X-OAuth-Client-Id": "4818aa2f7fbc1234a086",
+        "X-GitHub-Media-Type": "github.v3; format=json",
+        "Access-Control-Expose-Headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Security-Policy": "default-src 'none'",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains; preload",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "deny",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Served-By": "bae57931a6fe678a3dffe9be8e7819c8",
+        "X-GitHub-Request-Id": "B51E0A32:DA3D:2699C966:5729041E"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "\"\"",
+      "headers": {
+        "User-agent": "tentacat",
+        "Authorization": "token 1c4a58ba3f7bccb7e0d3c93b224fca796c2f4cfd"
+      },
+      "method": "delete",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.github.com/repos/alemata/credo_test/hooks/8274395"
+    },
+    "response": {
+      "body": "",
+      "headers": {
+        "Server": "GitHub.com",
+        "Date": "Tue, 03 May 2016 20:03:43 GMT",
+        "Status": "204 No Content",
+        "X-RateLimit-Limit": "5000",
+        "X-RateLimit-Remaining": "4976",
+        "X-RateLimit-Reset": "1462308708",
+        "X-OAuth-Scopes": "repo, user:email",
+        "X-Accepted-OAuth-Scopes": "admin:repo_hook, public_repo, repo",
+        "X-OAuth-Client-Id": "4818aa2f7fbc1234a086",
+        "X-GitHub-Media-Type": "github.v3; format=json",
+        "Access-Control-Expose-Headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Security-Policy": "default-src 'none'",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains; preload",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "deny",
+        "X-XSS-Protection": "1; mode=block",
+        "Vary": "Accept-Encoding",
+        "X-Served-By": "b0ef53392caa42315c6206737946d931",
+        "X-GitHub-Request-Id": "B51E0A32:DA3D:2699CA54:5729041E"
+      },
+      "status_code": 204,
+      "type": "ok"
+    }
+  }
+]

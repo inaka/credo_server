@@ -6,7 +6,8 @@ defmodule CredoServer.Plug.Auth do
 
   def check_user(conn, _) do
     if needs_auth_check(conn) do
-      conn = check_session(conn, get_session(conn, :user))
+      user_session = get_session(conn, :user) || conn.assigns[:user]
+      conn = check_session(conn, user_session)
     end
 
     conn
@@ -22,7 +23,7 @@ defmodule CredoServer.Plug.Auth do
     redirect_to_auth(conn)
   end
   defp check_session(conn, session) do
-    case CredoServer.User.find_by_auth_token(session.token) do
+    case CredoServer.User.find_by_auth_token(session.auth_token) do
       nil ->
         redirect_to_auth(conn)
       valid_user ->

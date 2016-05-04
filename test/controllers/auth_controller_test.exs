@@ -31,9 +31,12 @@ defmodule CredoServer.AuthControllerTest do
 
   test "create user on github callback" do
     use_cassette "github_callback" do
+      Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
       conn = conn(:get, "/auth/oauth/callback?code=ac91e51c2ec6c6e3b57b")
+      assert 0 == Repo.all(User) |> Enum.count
       conn = Router.call(conn, @router_opts)
       created_user = Repo.get_by(User, github_token: "1c4a58ba3f7bccb7e0d3c93b224fca796c2f4cfd")
+      assert 1 == Repo.all(User) |> Enum.count
       assert created_user.username == "alemata"
       assert conn.status == 302
       assert hd(get_resp_header(conn, "location")) =~ "/repos"

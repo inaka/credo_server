@@ -19,10 +19,16 @@ defmodule CredoServer.TestUtils do
     |> fetch_session
   end
 
+  def create_user() do
+    now = Ecto.DateTime.utc
+    not_expired = %Ecto.DateTime{day: now.day, hour: now.hour, min: now.min,
+                             month: now.month, sec: now.sec, year: now.year + 1}
+    create_user(not_expired)
+  end
   def create_user(auth_expires) do
-    user_info = %{username: "username",
+    user_info = %{username: "alemata",
                   name: "name",
-                  github_token: "token",
+                  github_token: "github_token_example",
                   email: "email@email.com",
                   auth_token: "validtoken",
                   auth_expires: auth_expires}
@@ -30,5 +36,18 @@ defmodule CredoServer.TestUtils do
 
     {:ok, user} = Repo.insert(user_changeset)
     user
+  end
+
+  def login_user(conn) do
+    now = Ecto.DateTime.utc
+    not_expired = %Ecto.DateTime{day: now.day, hour: now.hour, min: now.min,
+                             month: now.month, sec: now.sec, year: now.year + 1}
+    user = create_user(not_expired)
+    conn = assign(conn, :user, %{auth_token: user.auth_token})
+    conn
+  end
+  def login_user(conn, user) do
+    conn = assign(conn, :user, %{auth_token: user.auth_token})
+    conn
   end
 end

@@ -35,6 +35,7 @@ defmodule CredoServer.FileUtils do
       {:ok, content} ->
         config_path = "#{repository_path}/.credo.exs"
         File.write(config_path, content)
+      _ ->
     end
   end
 

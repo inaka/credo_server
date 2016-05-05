@@ -101,18 +101,18 @@ defmodule CredoServer.FileUtilsTests do
     FileUtils.create_content_file(cred, @repository_info, @github_file)
     path = "#{repository_path}/lib/another_file.ex"
     assert File.exists?(path)
-    assert File.read!(path) == "file content"
+    assert File.read!(path) == File.read!("test/file_example.exs")
   end
 
   test "add repository config file" do
     pr_data = %{"pull_request" => %{"head" => %{"ref" => "branch"}},
-                "repository" => %{"full_name" => "name"}}
+                "repository" => @repository_info}
     cred = GithubUtils.basic_auth()
     repository_path = FileUtils.create_repository_dir(@repository_info)
     FileUtils.add_repository_credo_config(cred, pr_data, repository_path)
     path = "#{repository_path}/.credo.exs"
     assert File.exists?(path)
-    assert File.read!(path) == "file content"
+    assert File.read!(path) == File.read!("test/credo_config.exs")
   end
 
   test "delete repository path" do

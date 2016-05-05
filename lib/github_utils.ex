@@ -26,8 +26,8 @@ defmodule CredoServer.GithubUtils do
     @egithub.oauth(github_token)
   end
 
-  def file_content(cred, repository, commit_id, filename) do
-    @egithub.file_content(cred, repository, commit_id, filename)
+  def file_content(cred, repository, commit, filename) do
+    @egithub.file_content(cred, repository, commit, filename)
   end
 
   def event(module, status_cred, tool_name, context, comments_cred, request) do

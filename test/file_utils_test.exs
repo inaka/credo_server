@@ -85,11 +85,6 @@ defmodule CredoServer.FileUtilsTests do
   "raw_url" => "https://github.com/alemata/credo_test/raw/5f58c47bd71c97cdfe46d4ef456b9d0a0fd10695/lib/another_file.ex",
   "sha" => "c1f12c512b6ec76c58e7cdc97b9c5111d3eff8a0", "status" => "modified"}
 
-  test "get repository path" do
-    repository_path = FileUtils.repository_path(@repository_info)
-    assert String.ends_with?(repository_path, "/alemata/credo_test")
-  end
-
   test "create repository dir" do
     repository_dir = FileUtils.create_repository_dir(@repository_info)
     assert File.exists?(repository_dir)
@@ -97,7 +92,7 @@ defmodule CredoServer.FileUtilsTests do
 
   test "create content file" do
     cred = GithubUtils.basic_auth()
-    repository_path = FileUtils.repository_path(@repository_info)
+    repository_path = FileUtils.create_repository_dir(@repository_info)
     FileUtils.create_content_file(cred, @repository_info, @github_file)
     path = "#{repository_path}/lib/another_file.ex"
     assert File.exists?(path)

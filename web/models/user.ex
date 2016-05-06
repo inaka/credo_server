@@ -122,7 +122,11 @@ defmodule CredoServer.User do
   defp get_public_repositories(user) do
     user
     |> get_repositories
-    |> Enum.filter(fn(repository) -> not repository["private"] end)
+    |> Enum.filter(&public_and_admin_filter/1)
+  end
+
+  defp public_and_admin_filter(repository_info) do
+    not repository_info["private"] and repository_info["permissions"]["admin"]
   end
 
   defp update_token(user) do

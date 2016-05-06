@@ -65,6 +65,10 @@ defmodule CredoServer.Router do
     AuthController.login(conn)
   end
 
+  get "/auth/oauth/logout" do
+    AuthController.logout(conn)
+  end
+
   get "/auth/oauth/callback" do
     AuthController.callback(conn)
   end

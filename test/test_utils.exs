@@ -1,7 +1,6 @@
 defmodule CredoServer.TestUtils do
   use Plug.Test
-  alias CredoServer.Repo
-  alias CredoServer.User
+  alias CredoServer.{Repo, User}
 
   @default_opts [
     store: :cookie,

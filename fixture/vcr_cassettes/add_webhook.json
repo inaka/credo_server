@@ -4,7 +4,7 @@
       "body": "{\"active\":true,\"config\":{\"content_type\":\"json\",\"url\":\"http://62f72c52.ngrok.io/webhook\"},\"events\":[\"pull_request\"],\"name\":\"web\"}",
       "headers": {
         "User-agent": "tentacat",
-        "Authorization": "token 1c4a58ba3f7bccb7e0d3c93b224fca796c2f4cfd"
+        "Authorization": "token placeholder"
       },
       "method": "post",
       "options": [],

@@ -1,10 +1,6 @@
 defmodule CredoServer.RepositoriesControllerTest do
   use Plug.Test
-  alias CredoServer.Router
-  alias CredoServer.Repo
-  alias CredoServer.Repository
-  alias CredoServer.User
-  alias CredoServer.TestUtils
+  alias CredoServer.{Router, Repo, Repository, User, TestUtils}
 
   use ExUnit.Case, async: false
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
@@ -68,6 +64,29 @@ defmodule CredoServer.RepositoriesControllerTest do
     end
   end
 
+  test "add webhook to repo fail" do
+    use_cassette "add_webhook_fails" do
+      Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
+      user = TestUtils.create_user()
+      repo_info = [github_id: 56711785, name: "credo_test",
+                   full_name: "alemata/credo_test",
+                   html_url: "https://github.com/alemata/credo_test",
+                   status: "off"]
+      repo_info = Ecto.build_assoc(user, :repositories, repo_info)
+
+      {:ok, repo} = Repo.insert(repo_info)
+
+      conn = conn(:post, "/repos/#{repo.id}/webhook") |> TestUtils.sign_conn
+      conn = TestUtils.login_user(conn, user)
+
+      conn = Router.call(conn, @router_opts)
+
+      repo = Repo.get_by(Repository, github_id: 56711785)
+      assert repo.status == "off"
+      assert conn.status == 422
+    end
+  end
+
   test "remove webhook from repo" do
     use_cassette "remove_webhook" do
       Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
@@ -101,7 +120,7 @@ defmodule CredoServer.RepositoriesControllerTest do
                  status: "on"]
     repo_info = Ecto.build_assoc(user, :repositories, repo_info)
 
-    {:ok, repo} = Repo.insert(repo_info)
+    {:ok, _repo} = Repo.insert(repo_info)
 
     conn = conn(:post, "/webhook", %{"repository" => %{"full_name" => "alemata/credo_test"}}) |> TestUtils.sign_conn
     conn = Router.call(conn, @router_opts)

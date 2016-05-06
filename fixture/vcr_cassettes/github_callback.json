@@ -1,7 +1,7 @@
 [
   {
     "request": {
-      "body": "client_id=4818aa2f7fbc1234a086&client_secret=805bca159c281dcda265eb9786d16712ba0efca5&code=ac91e51c2ec6c6e3b57b",
+      "body": "client_id=github_token_example",
       "headers": {
         "Content-Type": "application/x-www-form-urlencoded",
         "Accept": "application/json"
@@ -12,7 +12,7 @@
       "url": "https://github.com/login/oauth/access_token"
     },
     "response": {
-      "body": "{\"access_token\":\"1c4a58ba3f7bccb7e0d3c93b224fca796c2f4cfd\",\"token_type\":\"bearer\",\"scope\":\"repo,user:email\"}",
+      "body": "{\"access_token\":\"github_token_example\",\"token_type\":\"bearer\",\"scope\":\"repo,user:email\"}",
       "headers": {
         "Server": "GitHub.com",
         "Date": "Wed, 27 Apr 2016 20:18:08 GMT",
@@ -42,7 +42,7 @@
       "body": "\"\\\"\\\"\"",
       "headers": {
         "User-agent": "tentacat",
-        "Authorization": "token 1c4a58ba3f7bccb7e0d3c93b224fca796c2f4cfd"
+        "Authorization": "token github_token_example"
       },
       "method": "get",
       "options": [],
@@ -87,7 +87,7 @@
       "body": "\"\\\"\\\"\"",
       "headers": {
         "User-agent": "tentacat",
-        "Authorization": "token 1c4a58ba3f7bccb7e0d3c93b224fca796c2f4cfd"
+        "Authorization": "token github_token_example"
       },
       "method": "get",
       "options": [],

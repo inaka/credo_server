@@ -6,8 +6,10 @@ defmodule CredoServer.AuthPlugTest do
 
   test "not logged in user" do
     Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
-    conn = conn(:get, "/repos") |> TestUtils.sign_conn()
-    conn = check_user(conn, %{})
+    conn =
+      conn(:get, "/repos")
+      |> TestUtils.sign_conn()
+      |> check_user(%{})
     assert conn.status == 302
     assert hd(get_resp_header(conn, "location")) == "/auth"
     refute conn.assigns[:user]
@@ -15,9 +17,12 @@ defmodule CredoServer.AuthPlugTest do
 
   test "logged with an invalid token" do
     Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
-    conn = conn(:get, "/repos") |> TestUtils.sign_conn
-    conn = put_session(conn, :user, %{auth_token: "invalidtoken"})
-    conn = check_user(conn, %{})
+    conn =
+      conn(:get, "/repos")
+      |> TestUtils.sign_conn
+      |> put_session(:user, %{auth_token: "invalidtoken"})
+      |> check_user(%{})
+
     assert conn.status == 302
     assert hd(get_resp_header(conn, "location")) == "/auth"
     refute conn.assigns[:user]
@@ -30,9 +35,12 @@ defmodule CredoServer.AuthPlugTest do
                              month: now.month, sec: now.sec, year: now.year - 1}
     user = TestUtils.create_user(expired)
 
-    conn = conn(:get, "/repos") |> TestUtils.sign_conn
-    conn = put_session(conn, :user, %{auth_token: user.auth_token})
-    conn = check_user(conn, %{})
+    conn =
+      conn(:get, "/repos")
+      |> TestUtils.sign_conn
+      |> put_session(:user, %{auth_token: user.auth_token})
+      |> check_user(%{})
+
     assert conn.status == 302
     assert hd(get_resp_header(conn, "location")) == "/auth"
     refute conn.assigns[:user]
@@ -45,9 +53,12 @@ defmodule CredoServer.AuthPlugTest do
                              month: now.month, sec: now.sec, year: now.year + 1}
     user = TestUtils.create_user(not_expired)
 
-    conn = conn(:get, "/repos") |> TestUtils.sign_conn
-    conn = put_session(conn, :user, %{auth_token: user.auth_token})
-    conn = check_user(conn, %{})
+    conn =
+      conn(:get, "/repos")
+      |> TestUtils.sign_conn
+      |> put_session(:user, %{auth_token: user.auth_token})
+      |> check_user(%{})
+
     assert conn.assigns.user
   end
 end

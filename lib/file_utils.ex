@@ -34,6 +34,7 @@ defmodule CredoServer.FileUtils do
         config_path = "#{repository_path}/.credo.exs"
         File.write(config_path, content)
       _ ->
+        :ok
     end
   end
 
@@ -43,6 +44,6 @@ defmodule CredoServer.FileUtils do
 
   defp get_repository_path(repository_info) do
     repository = repository_info["full_name"]
-    "#{System.tmp_dir}#{repository}"
+    System.tmp_dir <> repository
   end
 end

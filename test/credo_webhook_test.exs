@@ -1,9 +1,8 @@
-defmodule CredoServerTest do
+defmodule CredoWebhookTest do
   use ExUnit.Case
-  alias CredoServer.CredoWebhook
-  alias CredoServer.GithubUtils
+  alias CredoServer.{CredoWebhook, GithubUtils}
 
-  test "hanlde pull request with default config" do
+  test "handle pull request with default config" do
     cred = GithubUtils.basic_auth()
     pr_data = %{"pull_request" => %{"head" => %{"ref" => "without_config"}},
                 "repository" => %{"full_name" => "alemata/credo_test"}}

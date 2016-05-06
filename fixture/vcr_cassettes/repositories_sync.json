@@ -4,7 +4,7 @@
       "body": "\"\\\"\\\"\"",
       "headers": {
         "User-agent": "tentacat",
-        "Authorization": "token 1c4a58ba3f7bccb7e0d3c93b224fca796c2f4cfd"
+        "Authorization": "token github_token_example"
       },
       "method": "get",
       "options": [],
@@ -49,7 +49,7 @@
       "body": "\"\\\"\\\"\"",
       "headers": {
         "User-agent": "tentacat",
-        "Authorization": "token 1c4a58ba3f7bccb7e0d3c93b224fca796c2f4cfd"
+        "Authorization": "token github_token_example"
       },
       "method": "get",
       "options": [],

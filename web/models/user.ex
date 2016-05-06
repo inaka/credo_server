@@ -3,10 +3,8 @@ defmodule CredoServer.User do
 
   import Ecto.Changeset
   import Ecto.Query
-  alias CredoServer.Repo
-  alias CredoServer.User
-  alias CredoServer.Repository
   use Ecto.Schema
+  alias CredoServer.{Repo, User, Repository}
 
   schema "users" do
     field :name, :string
@@ -17,7 +15,7 @@ defmodule CredoServer.User do
     field :auth_token, :string
     field :auth_expires, Ecto.DateTime
     field :synced_at, Ecto.DateTime
-    has_many :repositories, CredoServer.Repository
+    has_many :repositories, Repository
 
     timestamps
   end
@@ -42,7 +40,7 @@ defmodule CredoServer.User do
       []    -> nil
       [user] -> user
       users -> raise Ecto.MultipleResultsError,
-                     queryable: CredoServer.User,
+                     queryable: User,
                      count: length(users)
     end
   end

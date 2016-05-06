@@ -1,15 +1,10 @@
 defmodule CredoServer.RepositoriesController do
   @moduledoc false
 
-  alias CredoServer.Repository
-  alias CredoServer.User
-  alias CredoServer.Repo
-  alias CredoServer.GithubUtils
-  alias CredoServer.CredoWebhook
+  alias CredoServer.{Repository, User, Repo, GithubUtils, CredoWebhook, Render}
 
-  alias CredoServer.Render
-  import Plug.Conn
   import CredoServer.RouterHelper
+  import Plug.Conn
 
   def index(conn) do
     user = conn.assigns.user

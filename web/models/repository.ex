@@ -3,9 +3,7 @@ defmodule CredoServer.Repository do
 
   use Ecto.Schema
   import Ecto.Changeset
-  alias CredoServer.Repo
-  alias CredoServer.Repository
-  alias CredoServer.User
+  alias CredoServer.{Repo, Repository, User}
 
   schema "repositories" do
     belongs_to :user, CredoServer.User

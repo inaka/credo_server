@@ -1,7 +1,6 @@
 defmodule CredoServer.FileUtilsTests do
   use ExUnit.Case
-  alias CredoServer.FileUtils
-  alias CredoServer.GithubUtils
+  alias CredoServer.{FileUtils, GithubUtils}
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
   @repository_info %{"statuses_url" => "https://api.github.com/repos/alemata/credo_test/statuses/{sha}",

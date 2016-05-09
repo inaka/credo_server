@@ -91,4 +91,21 @@ defmodule CredoServer.RepositoriesControllerTest do
       assert hd(get_resp_header(conn, "location")) == "/repos"
     end
   end
+
+  test "call egithub webhook on github event" do
+    Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
+    user = TestUtils.create_user()
+    repo_info = [github_id: 56711785, name: "credo_test",
+                 full_name: "alemata/credo_test",
+                 html_url: "https://github.com/alemata/credo_test",
+                 status: "on"]
+    repo_info = Ecto.build_assoc(user, :repositories, repo_info)
+
+    {:ok, repo} = Repo.insert(repo_info)
+
+    conn = conn(:post, "/webhook", %{"repository" => %{"full_name" => "alemata/credo_test"}}) |> TestUtils.sign_conn
+    conn = Router.call(conn, @router_opts)
+
+    assert conn.status == 204
+  end
 end

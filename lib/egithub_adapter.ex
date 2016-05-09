@@ -18,4 +18,9 @@ defmodule CredoServer.EgithubAdapter do
   def file_content(cred, repository, commit_id, filename) do
     File.read("test/file_example.exs")
   end
+
+  # :egithub_webhook
+  def event(module, status_cred, tool_name, context, comments_cred, request) do
+    :ok
+  end
 end

@@ -53,8 +53,9 @@ defmodule CredoServer.RepositoriesController do
     request_map = %{headers: headers_map, body: Poison.encode!(response_body)}
     cred = GithubUtils.basic_auth()
 
-    :egithub_webhook.event(CredoWebhook, status_cred, 'Credo',
-                           'credo', cred, request_map)
+    GithubUtils.event(CredoWebhook, status_cred,
+                      'Credo', 'credo',
+                      cred, request_map)
 
     send_resp(conn, :no_content, "")
   end

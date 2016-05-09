@@ -2,6 +2,7 @@ defmodule CredoServer.GithubUtils do
   @moduledoc false
 
   @egithub Application.get_env(:credo_server, :egithub)
+  @egithub_webhook Application.get_env(:credo_server, :egithub_webhook)
 
   def commit_id(github_file) do
     commit_regexp = ~r/.+\/raw\/(?<commit>\w+)\//
@@ -27,6 +28,12 @@ defmodule CredoServer.GithubUtils do
 
   def file_content(cred, repository, commit_id, filename) do
     @egithub.file_content(cred, repository, commit_id, filename)
+  end
+
+  def event(module, status_cred, tool_name, context, comments_cred, request) do
+    @egithub_webhook.event(module, status_cred,
+                           tool_name, context,
+                           comments_cred, request)
   end
 
   # Private

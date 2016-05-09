@@ -8,6 +8,7 @@ defmodule CredoServer.Mixfile do
      elixirc_paths: ["lib", "web"],
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     test_coverage: [tool: ExCoveralls],
      deps: deps]
   end
 
@@ -39,7 +40,8 @@ defmodule CredoServer.Mixfile do
      {:tentacat, "~> 0.2"},
      {:secure_random, "~> 0.2"},
      {:credo, "~> 0.3", only: [:dev, :test]},
-     {:egithub, github: "inaka/erlang-github"}
+     {:egithub, github: "inaka/erlang-github"},
+     {:excoveralls, "~> 0.4", only: :test}
    ]
   end
 end

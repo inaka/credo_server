@@ -16,3 +16,4 @@ config :credo_server, :github_user, "git_user"
 config :credo_server, :github_password, "git_pass"
 config :credo_server, :webhook_url, System.get_env("WEBHOOK_URL")
 config :credo_server, :secret_key_base, System.get_env("SECRET_KEY_BASE")
+config :credo_server, :egithub, CredoServer.EgithubAdapter

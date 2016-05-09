@@ -9,7 +9,7 @@ defmodule CredoServer.FileUtils do
 
   def create_repository_dir(repository_info) do
     path = repository_path(repository_info)
-    File.mkdir_p(Path.dirname(path))
+    File.mkdir_p(path)
 
     path
   end
@@ -18,7 +18,7 @@ defmodule CredoServer.FileUtils do
     commit_id = GithubUtils.commit_id(github_file)
     repository = repository_info["full_name"]
     filename = github_file["filename"]
-    {:ok, content} = :egithub.file_content(cred, repository, commit_id, filename)
+    {:ok, content} = GithubUtils.file_content(cred, repository, commit_id, filename)
 
     repository_path = create_repository_dir(repository_info)
     file_path = "#{repository_path}/#{filename}"
@@ -31,7 +31,7 @@ defmodule CredoServer.FileUtils do
   def add_repository_credo_config(cred, pr_data, repository_path) do
     branch = pr_data["pull_request"]["head"]["ref"]
     repository_name = pr_data["repository"]["full_name"]
-    case :egithub.file_content(cred, repository_name, branch, ".credo.exs") do
+    case GithubUtils.file_content(cred, repository_name, branch, ".credo.exs") do
       {:ok, content} ->
         config_path = "#{repository_path}/.credo.exs"
         File.write(config_path, content)

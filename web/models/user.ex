@@ -27,8 +27,7 @@ defmodule CredoServer.User do
 
   def changeset(user, params \\ :empty) do
     user
-    |> cast(params, @fields)
-    |> validate_required(@fields)
+    |> cast(params, @fields, @fields)
   end
 
   @doc """

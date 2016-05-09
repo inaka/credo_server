@@ -23,8 +23,7 @@ defmodule CredoServer.Repository do
 
   def changeset(repository, params \\ :empty) do
     repository
-    |> cast(params, @fields)
-    |> validate_required(@fields)
+    |> cast(params, @fields, @fields)
   end
 
   def webhook_status(repository_response, user) do

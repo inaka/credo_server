@@ -16,6 +16,7 @@ RUN ./install_erlang.sh
 RUN mkdir /myapp
 WORKDIR /myapp
 COPY . /myapp
+COPY ssh/* /root/.ssh/
 
 RUN mix deps.get
 RUN mix

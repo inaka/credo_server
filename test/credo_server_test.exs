@@ -5,10 +5,14 @@ defmodule CredoServerTest do
 
   @router_opts Router.init([])
 
-  test "root redirect to /repos when logged in" do
+  setup do
     Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
-    conn = 
-      conn(:get, "/") 
+    :ok
+  end
+
+  test "root redirect to /repos when logged in" do
+    conn =
+      conn(:get, "/")
       |> TestUtils.sign_conn
       |> TestUtils.login_user
       |> Router.call(@router_opts)
@@ -18,9 +22,8 @@ defmodule CredoServerTest do
   end
 
   test "root redirect " do
-    Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
     conn =
-      conn(:get, "/invalid_url") 
+      conn(:get, "/invalid_url")
       |> TestUtils.sign_conn
       |> TestUtils.login_user
       |> Router.call(@router_opts)

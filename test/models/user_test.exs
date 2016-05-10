@@ -1,10 +1,11 @@
 defmodule CredoServer.UserTest do
   use ExUnit.Case, async: true
-  alias CredoServer.{TestUtils, User, Repo}
+  alias CredoServer.{TestUtils, User, Repo, Repository}
 
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
-  setup_all do
+  setup do
+    Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
     ExVCR.Config.cassette_library_dir("fixture/vcr_cassettes")
     :ok
   end
@@ -16,7 +17,6 @@ defmodule CredoServer.UserTest do
   end
 
   test "do not find by auth token if expired" do
-    Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
     now = Ecto.DateTime.utc
     expired = %Ecto.DateTime{day: now.day, hour: now.hour, min: now.min,
                              month: now.month, sec: now.sec, year: now.year - 1}
@@ -26,7 +26,6 @@ defmodule CredoServer.UserTest do
   end
 
   test "raise exception is multiple users with same token" do
-    Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
     user = TestUtils.create_user()
     TestUtils.create_user()
     assert_raise(Ecto.MultipleResultsError, fn ->
@@ -36,7 +35,6 @@ defmodule CredoServer.UserTest do
 
   test "new user is created" do
     use_cassette "github_callback" do
-    Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
       created_user = User.save("token")
       assert 1 == Repo.all(User) |> Enum.count
       assert created_user.username == "alemata"
@@ -45,7 +43,6 @@ defmodule CredoServer.UserTest do
 
   test "user is updated with new token" do
     use_cassette "github_callback" do
-    Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
       created_user = User.save("token")
       assert 1 == Repo.all(User) |> Enum.count
       assert created_user.username == "alemata"

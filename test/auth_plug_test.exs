@@ -4,8 +4,12 @@ defmodule CredoServer.AuthPlugTest do
   import CredoServer.Plug.Auth
   alias CredoServer.TestUtils
 
-  test "not logged in user" do
+  setup do
     Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
+    :ok
+  end
+
+  test "not logged in user" do
     conn =
       conn(:get, "/repos")
       |> TestUtils.sign_conn()
@@ -16,7 +20,6 @@ defmodule CredoServer.AuthPlugTest do
   end
 
   test "logged with an invalid token" do
-    Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
     conn =
       conn(:get, "/repos")
       |> TestUtils.sign_conn
@@ -29,7 +32,6 @@ defmodule CredoServer.AuthPlugTest do
   end
 
   test "logged with an expired token" do
-    Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
     now = Ecto.DateTime.utc
     expired = %Ecto.DateTime{day: now.day, hour: now.hour, min: now.min,
                              month: now.month, sec: now.sec, year: now.year - 1}
@@ -47,7 +49,6 @@ defmodule CredoServer.AuthPlugTest do
   end
 
   test "logged with a valid token" do
-    Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
     now = Ecto.DateTime.utc
     not_expired = %Ecto.DateTime{day: now.day, hour: now.hour, min: now.min,
                              month: now.month, sec: now.sec, year: now.year + 1}

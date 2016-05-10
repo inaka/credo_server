@@ -5,8 +5,9 @@ defmodule CredoServer.AuthControllerTest do
 
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
-  setup_all do
+  setup do
     ExVCR.Config.cassette_library_dir("fixture/vcr_cassettes")
+    Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
     :ok
   end
 
@@ -33,7 +34,6 @@ defmodule CredoServer.AuthControllerTest do
 
   test "create user on github callback" do
     use_cassette "github_callback" do
-      Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
       conn = conn(:get, "/auth/oauth/callback?code=ac91e51c2ec6c6e3b57b")
       assert 0 == Repo.all(User) |> Enum.count
       conn = Router.call(conn, @router_opts)

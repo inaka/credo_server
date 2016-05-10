@@ -33,6 +33,71 @@ defmodule CredoServer.UserTest do
     end)
   end
 
+  test "active returns 0 when no repositories are on" do
+    user = TestUtils.create_user()
+    repo_fields = %{github_id: 56711785, name: "credo_test",
+                    full_name: "alemata/credo_test",
+                    html_url: "https://github.com/alemata/credo_test",
+                    status: "off"}
+    repo_info = Ecto.build_assoc(user, :repositories, repo_fields)
+    Repo.insert(repo_info)
+    active_users = User.active_users()
+
+    assert active_users == []
+  end
+
+  test "active returns 1 when 1 user is active" do
+    user = TestUtils.create_user()
+    repo_fields = %{github_id: 56711785, name: "credo_test",
+                    full_name: "alemata/credo_test",
+                    html_url: "https://github.com/alemata/credo_test",
+                    status: "on"}
+    repo_info = Ecto.build_assoc(user, :repositories, repo_fields)
+    Repo.insert(repo_info)
+
+    assert [_] = User.active_users()
+  end
+
+  test "active returs 1 when 1 user is active (with another not active user)" do
+    user = TestUtils.create_user()
+    user2 = TestUtils.create_user()
+    repo_fields = %{github_id: 56711785, name: "credo_test",
+                    full_name: "alemata/credo_test",
+                    html_url: "https://github.com/alemata/credo_test",
+                    status: "on"}
+    repo_info = Ecto.build_assoc(user, :repositories, repo_fields)
+    Repo.insert(repo_info)
+
+    repo_fields = %{github_id: 56711785, name: "credo_test",
+                    full_name: "alemata/credo_test",
+                    html_url: "https://github.com/alemata/credo_test",
+                    status: "off"}
+    repo_info = Ecto.build_assoc(user2, :repositories, repo_fields)
+    Repo.insert(repo_info)
+
+    assert [_] = User.active_users()
+  end
+
+  test "active returns 2 when 2 users active" do
+    user = TestUtils.create_user()
+    user2 = TestUtils.create_user()
+    repo_fields = %{github_id: 56711785, name: "credo_test",
+                    full_name: "alemata/credo_test",
+                    html_url: "https://github.com/alemata/credo_test",
+                    status: "on"}
+    repo_info = Ecto.build_assoc(user, :repositories, repo_fields)
+    Repo.insert(repo_info)
+
+    repo_fields = %{github_id: 56711785, name: "credo_test",
+                    full_name: "alemata/credo_test",
+                    html_url: "https://github.com/alemata/credo_test",
+                    status: "on"}
+    repo_info = Ecto.build_assoc(user2, :repositories, repo_fields)
+    Repo.insert(repo_info)
+
+    assert [_, _] = User.active_users()
+  end
+
   test "new user is created" do
     use_cassette "github_callback" do
       created_user = User.save("token")

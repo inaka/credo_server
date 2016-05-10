@@ -79,6 +79,17 @@ defmodule CredoServer.User do
     Ecto.Query.order_by(query, [r], r.full_name)
   end
 
+  @doc """
+  Get amount of users who have at least one repository being checked
+  """
+  def active_users() do
+    query = from(c in CredoServer.User,
+                 join: p in assoc(c, :repositories),
+                 where: p.status == "on", group_by: c.id)
+
+    CredoServer.Repo.all(query)
+  end
+
   # Private
 
   defp create_user_repos(user, public_repositories) do

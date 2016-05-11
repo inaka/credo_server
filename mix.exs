@@ -42,7 +42,7 @@ defmodule CredoServer.Mixfile do
      {:ecto, "~> 1.1.5"},
      {:tentacat, "~> 0.2"},
      {:secure_random, "~> 0.2"},
-     {:credo, "~> 0.3", only: [:dev, :test]},
+     {:credo, "~> 0.3"},
      {:egithub, github: "inaka/erlang-github"},
      {:excoveralls, "~> 0.4", only: :test},
      {:exvcr, "~> 0.7", only: :test}

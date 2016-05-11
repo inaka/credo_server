@@ -31,7 +31,7 @@ defmodule CredoServer.RepositoriesController do
 
      case Repository.add_webhook(repository, user) do
        :ok ->
-         redirect(conn, to: "/repos")
+         send_resp(conn, 200, "ok")
        :error ->
          send_resp(conn, 422, "There was a problem adding the webhook")
      end
@@ -42,7 +42,7 @@ defmodule CredoServer.RepositoriesController do
      repository = Repo.get(Repository, repository_id)
      Repository.remove_webhook(repository, user)
 
-     redirect(conn, to: "/repos")
+     send_resp(conn, 200, "ok")
   end
 
   def webhook(conn) do

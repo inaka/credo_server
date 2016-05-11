@@ -59,8 +59,7 @@ defmodule CredoServer.RepositoriesControllerTest do
 
       repo = Repo.get_by(Repository, github_id: 56711785)
       assert repo.status == "on"
-      assert conn.status == 302
-      assert hd(get_resp_header(conn, "location")) == "/repos"
+      assert conn.status == 200
     end
   end
 
@@ -106,8 +105,7 @@ defmodule CredoServer.RepositoriesControllerTest do
 
       repo = Repo.get_by(Repository, github_id: 56711785)
       assert repo.status == "off"
-      assert conn.status == 302
-      assert hd(get_resp_header(conn, "location")) == "/repos"
+      assert conn.status == 200
     end
   end
 

@@ -1,4 +1,4 @@
-<form action="repos/sync" class="" method="GET">
+<form action="repos/sync" method="GET">
   <button id="sync">Sync List</button>
 </form>
 

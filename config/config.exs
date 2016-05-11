@@ -37,6 +37,8 @@ config :credo_server, :github_user, System.get_env("GITHUB_USER")
 config :credo_server, :github_password, System.get_env("GITHUB_PASSWORD")
 config :credo_server, :webhook_url, System.get_env("WEBHOOK_URL")
 config :credo_server, :secret_key_base, System.get_env("SECRET_KEY_BASE")
+config :credo_server, :egithub, :egithub
+config :credo_server, :egithub_webhook, :egithub_webhook
 
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment
@@ -44,4 +46,4 @@ config :credo_server, :secret_key_base, System.get_env("SECRET_KEY_BASE")
 # Configuration from the imported file will override the ones defined
 # here (which is why it is important to import them last).
 #
-# import_config "#{Mix.env}.exs"
+import_config "#{Mix.env}.exs"

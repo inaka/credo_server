@@ -1,6 +1,9 @@
 defmodule CredoServer.GithubUtils do
   @moduledoc false
 
+  @egithub Application.get_env(:credo_server, :egithub)
+  @egithub_webhook Application.get_env(:credo_server, :egithub_webhook)
+
   def commit_id(github_file) do
     commit_regexp = ~r/.+\/raw\/(?<commit>\w+)\//
     raw_url = github_file["raw_url"]
@@ -13,10 +16,24 @@ defmodule CredoServer.GithubUtils do
     get_relative_position(lines, abs_number, {-1, :undefined})
   end
 
-  def git_credentials() do
+  def basic_auth() do
     user = String.to_char_list(Application.get_env(:credo_server, :github_user))
     password = String.to_char_list(Application.get_env(:credo_server, :github_password))
-    :egithub.basic_auth(user, password)
+    @egithub.basic_auth(user, password)
+  end
+
+  def oauth(github_token) do
+    @egithub.oauth(github_token)
+  end
+
+  def file_content(cred, repository, commit, filename) do
+    @egithub.file_content(cred, repository, commit, filename)
+  end
+
+  def event(module, status_cred, tool_name, context, comments_cred, request) do
+    @egithub_webhook.event(module, status_cred,
+                           tool_name, context,
+                           comments_cred, request)
   end
 
   # Private

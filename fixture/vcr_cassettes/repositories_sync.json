@@ -1,0 +1,92 @@
+[
+  {
+    "request": {
+      "body": "\"\\\"\\\"\"",
+      "headers": {
+        "User-agent": "tentacat",
+        "Authorization": "token github_token_example"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.github.com/user/repos"
+    },
+    "response": {
+      "body": "[{\"id\":56711785,\"name\":\"credo_test\",\"full_name\":\"alemata/credo_test\",\"owner\":{\"login\":\"alemata\",\"id\":210338,\"avatar_url\":\"https://avatars.githubusercontent.com/u/210338?v=3\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/alemata\",\"html_url\":\"https://github.com/alemata\",\"followers_url\":\"https://api.github.com/users/alemata/followers\",\"following_url\":\"https://api.github.com/users/alemata/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/alemata/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/alemata/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/alemata/subscriptions\",\"organizations_url\":\"https://api.github.com/users/alemata/orgs\",\"repos_url\":\"https://api.github.com/users/alemata/repos\",\"events_url\":\"https://api.github.com/users/alemata/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/alemata/received_events\",\"type\":\"User\",\"site_admin\":false},\"private\":false,\"html_url\":\"https://github.com/alemata/credo_test\",\"description\":\"\",\"fork\":false,\"url\":\"https://api.github.com/repos/alemata/credo_test\",\"forks_url\":\"https://api.github.com/repos/alemata/credo_test/forks\",\"keys_url\":\"https://api.github.com/repos/alemata/credo_test/keys{/key_id}\",\"collaborators_url\":\"https://api.github.com/repos/alemata/credo_test/collaborators{/collaborator}\",\"teams_url\":\"https://api.github.com/repos/alemata/credo_test/teams\",\"hooks_url\":\"https://api.github.com/repos/alemata/credo_test/hooks\",\"issue_events_url\":\"https://api.github.com/repos/alemata/credo_test/issues/events{/number}\",\"events_url\":\"https://api.github.com/repos/alemata/credo_test/events\",\"assignees_url\":\"https://api.github.com/repos/alemata/credo_test/assignees{/user}\",\"branches_url\":\"https://api.github.com/repos/alemata/credo_test/branches{/branch}\",\"tags_url\":\"https://api.github.com/repos/alemata/credo_test/tags\",\"blobs_url\":\"https://api.github.com/repos/alemata/credo_test/git/blobs{/sha}\",\"git_tags_url\":\"https://api.github.com/repos/alemata/credo_test/git/tags{/sha}\",\"git_refs_url\":\"https://api.github.com/repos/alemata/credo_test/git/refs{/sha}\",\"trees_url\":\"https://api.github.com/repos/alemata/credo_test/git/trees{/sha}\",\"statuses_url\":\"https://api.github.com/repos/alemata/credo_test/statuses/{sha}\",\"languages_url\":\"https://api.github.com/repos/alemata/credo_test/languages\",\"stargazers_url\":\"https://api.github.com/repos/alemata/credo_test/stargazers\",\"contributors_url\":\"https://api.github.com/repos/alemata/credo_test/contributors\",\"subscribers_url\":\"https://api.github.com/repos/alemata/credo_test/subscribers\",\"subscription_url\":\"https://api.github.com/repos/alemata/credo_test/subscription\",\"commits_url\":\"https://api.github.com/repos/alemata/credo_test/commits{/sha}\",\"git_commits_url\":\"https://api.github.com/repos/alemata/credo_test/git/commits{/sha}\",\"comments_url\":\"https://api.github.com/repos/alemata/credo_test/comments{/number}\",\"issue_comment_url\":\"https://api.github.com/repos/alemata/credo_test/issues/comments{/number}\",\"contents_url\":\"https://api.github.com/repos/alemata/credo_test/contents/{+path}\",\"compare_url\":\"https://api.github.com/repos/alemata/credo_test/compare/{base}...{head}\",\"merges_url\":\"https://api.github.com/repos/alemata/credo_test/merges\",\"archive_url\":\"https://api.github.com/repos/alemata/credo_test/{archive_format}{/ref}\",\"downloads_url\":\"https://api.github.com/repos/alemata/credo_test/downloads\",\"issues_url\":\"https://api.github.com/repos/alemata/credo_test/issues{/number}\",\"pulls_url\":\"https://api.github.com/repos/alemata/credo_test/pulls{/number}\",\"milestones_url\":\"https://api.github.com/repos/alemata/credo_test/milestones{/number}\",\"notifications_url\":\"https://api.github.com/repos/alemata/credo_test/notifications{?since,all,participating}\",\"labels_url\":\"https://api.github.com/repos/alemata/credo_test/labels{/name}\",\"releases_url\":\"https://api.github.com/repos/alemata/credo_test/releases{/id}\",\"deployments_url\":\"https://api.github.com/repos/alemata/credo_test/deployments\",\"created_at\":\"2016-04-20T18:40:48Z\",\"updated_at\":\"2016-04-20T18:43:58Z\",\"pushed_at\":\"2016-04-21T19:16:13Z\",\"git_url\":\"git://github.com/alemata/credo_test.git\",\"ssh_url\":\"git@github.com:alemata/credo_test.git\",\"clone_url\":\"https://github.com/alemata/credo_test.git\",\"svn_url\":\"https://github.com/alemata/credo_test\",\"homepage\":null,\"size\":7,\"stargazers_count\":0,\"watchers_count\":0,\"language\":\"Elixir\",\"has_issues\":true,\"has_downloads\":true,\"has_wiki\":true,\"has_pages\":false,\"forks_count\":0,\"mirror_url\":null,\"open_issues_count\":1,\"forks\":0,\"open_issues\":1,\"watchers\":0,\"default_branch\":\"master\",\"permissions\":{\"admin\":true,\"push\":true,\"pull\":true}}]",
+      "headers": {
+        "Server": "GitHub.com",
+        "Date": "Wed, 27 Apr 2016 20:18:10 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "1122",
+        "Status": "200 OK",
+        "X-RateLimit-Limit": "5000",
+        "X-RateLimit-Remaining": "4942",
+        "X-RateLimit-Reset": "1461789382",
+        "Cache-Control": "private, max-age=60, s-maxage=60",
+        "Vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+        "ETag": "\"d9623c626c11da915f1c86dd956d7074\"",
+        "Last-Modified": "Fri, 15 Apr 2016 17:30:08 GMT",
+        "X-OAuth-Scopes": "repo, user:email",
+        "X-Accepted-OAuth-Scopes": "",
+        "X-OAuth-Client-Id": "4818aa2f7fbc1234a086",
+        "X-GitHub-Media-Type": "github.v3; format=json",
+        "Access-Control-Expose-Headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Security-Policy": "default-src 'none'",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains; preload",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "deny",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Served-By": "a51acaae89a7607fd7ee967627be18e4",
+        "X-GitHub-Request-Id": "B5A8BAEE:1559E:23D95488:57211E81"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "\"\\\"\\\"\"",
+      "headers": {
+        "User-agent": "tentacat",
+        "Authorization": "token github_token_example"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.github.com/repos/alemata/credo_test/hooks"
+    },
+    "response": {
+      "body": "[]",
+      "headers": {
+        "Server": "GitHub.com",
+        "Date": "Wed, 27 Apr 2016 20:18:10 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "1122",
+        "Status": "200 OK",
+        "X-RateLimit-Limit": "5000",
+        "X-RateLimit-Remaining": "4942",
+        "X-RateLimit-Reset": "1461789382",
+        "Cache-Control": "private, max-age=60, s-maxage=60",
+        "Vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+        "ETag": "\"d9623c626c11da915f1c86dd956d7074\"",
+        "Last-Modified": "Fri, 15 Apr 2016 17:30:08 GMT",
+        "X-OAuth-Scopes": "repo, user:email",
+        "X-Accepted-OAuth-Scopes": "",
+        "X-OAuth-Client-Id": "4818aa2f7fbc1234a086",
+        "X-GitHub-Media-Type": "github.v3; format=json",
+        "Access-Control-Expose-Headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Security-Policy": "default-src 'none'",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains; preload",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "deny",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Served-By": "a51acaae89a7607fd7ee967627be18e4",
+        "X-GitHub-Request-Id": "B5A8BAEE:1559E:23D95488:57211E81"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

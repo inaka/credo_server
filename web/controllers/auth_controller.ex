@@ -24,7 +24,7 @@ defmodule CredoServer.AuthController do
     user = CredoServer.User.save(access_token)
 
     conn
-    |> put_session(:user, %{token: user.auth_token})
+    |> put_session(:user, %{auth_token: user.auth_token})
     |> redirect(to: "/repos")
   end
 

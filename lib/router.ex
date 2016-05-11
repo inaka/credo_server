@@ -45,6 +45,10 @@ defmodule CredoServer.Router do
     RepositoriesController.index(conn)
   end
 
+  get "/repos/sync" do
+    RepositoriesController.sync(conn)
+  end
+
   post "/repos/:repository_id/webhook" do
     RepositoriesController.add_webhook(conn, repository_id)
   end

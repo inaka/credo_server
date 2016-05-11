@@ -128,4 +128,19 @@ defmodule CredoServer.RepositoriesControllerTest do
 
     assert conn.status == 204
   end
+
+  test "sync user repositories" do
+    use_cassette "repositories_sync" do
+      conn =
+        conn(:get, "/repos/sync")
+        |> TestUtils.sign_conn
+        |> TestUtils.login_user
+        |> Router.call(@router_opts)
+
+      user = Repo.get_by(User, auth_token: conn.assigns[:user].auth_token)
+      assert user.synced_at
+      assert 1 == Repo.all(Repository) |> Enum.count
+      assert conn.status == 200
+    end
+  end
 end

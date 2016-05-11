@@ -67,8 +67,8 @@ defmodule CredoServer.User do
   Sync user repositories
   """
   def sync_repositories(user) do
-    Repo.delete_all Ecto.assoc(user, :repositories)
     public_repositories = get_public_repositories(user)
+    Repo.delete_all Ecto.assoc(user, :repositories)
     create_user_repos(user, public_repositories)
     user_change = Ecto.Changeset.change(user, synced_at: Ecto.DateTime.utc)
     Repo.update(user_change)

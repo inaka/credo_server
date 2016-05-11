@@ -1,3 +1,7 @@
+<form action="repos/sync" class="" method="GET">
+  <button id="sync">Sync List</button>
+</form>
+
 <h2>Public Repositories</h2>
 <div class="repos section">
 

@@ -18,6 +18,13 @@ defmodule CredoServer.RepositoriesController do
     |> Render.render(&Render.repositories_index/1)
   end
 
+  def sync(conn) do
+    user = conn.assigns.user
+    User.sync_repositories(user)
+
+    send_resp(conn, 200, "ok")
+  end
+
   def add_webhook(conn, repository_id) do
      user = conn.assigns.user
      repository = Repo.get(Repository, repository_id)

@@ -6,6 +6,7 @@ defmodule CredoServer.Router do
   import CredoServer.Plug.Auth
 
   alias CredoServer.RepositoriesController
+  alias CredoServer.UsersController
   alias CredoServer.AuthController
   import CredoServer.RouterHelper
 
@@ -71,6 +72,10 @@ defmodule CredoServer.Router do
 
   get "/auth/oauth/callback" do
     AuthController.callback(conn)
+  end
+
+  get "/users/active" do
+    UsersController.active_users(conn)
   end
 
   match _ do

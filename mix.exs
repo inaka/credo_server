@@ -19,8 +19,8 @@ defmodule CredoServer.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:egithub, :httpoison, :postgrex,
-                    :ecto, :tentacat, :plug, :credo],
+    [applications: [:poison, :eex, :cowboy, :egithub, :httpoison, :postgrex,
+                    :ecto, :tentacat, :plug, :credo, :secure_random],
      mod: {CredoServer, []}]
   end
 
@@ -45,7 +45,8 @@ defmodule CredoServer.Mixfile do
      {:credo, "~> 0.3"},
      {:egithub, github: "inaka/erlang-github"},
      {:excoveralls, "~> 0.4", only: :test},
-     {:exvcr, "~> 0.7", only: :test}
+     {:exvcr, "~> 0.7", only: :test},
+     {:exrm, "~> 0.18.1"}
    ]
   end
 end

@@ -1,13 +1,14 @@
 db:
   image: postgres:9.0.22
   container_name: credo_db
-web:
-  build: .
-  command: mix phoenix.server
   environment:
-    MIX_ENV: dev
+    POSTGRES_DB: credo_server_stg
+web:
+  image: credo
+  command: monit -I
+  environment:
     PORT: 4000
-  container_name: credo_staging_web
+  container_name: credo_web
   ports:
    - "4000:4000"
   links:

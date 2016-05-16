@@ -16,13 +16,11 @@
 
       <div id="header">
         <ul class="menu">
-          <%= if Map.has_key?(assigns, :user) do %>
-          <li><a href="/auth/oauth/logout">Log out</a></li>
+          <li><a href="/about">About</a></li>
           <li><a href="/repos">Repos</a></li>
-          <%= end %>
         </ul>
         <div class="name">
-          <h1>Credo</h1>
+          <h1>CredoCI</h1>
           <blockquote>You ain't nothing but a hound dog...</blockquote>
         </div>
       </div>

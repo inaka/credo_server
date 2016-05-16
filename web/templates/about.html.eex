@@ -1,0 +1,28 @@
+<h2>Introduction</h2>
+<p>
+  <strong>CredoCI</strong> is a service created by
+  <a target="_blank" href="http://inaka.net">Inaka</a> that will integrate with
+  your <a target="_blank" href="http://github.com">Github</a> <emph>public</emph>
+  repositories and check all your Pull Requests with <a target="_blank" href="https://github.com/rrrene/credo"><code>credo</code></a>.
+</p>
+<hr />
+<h2>Usage</h2>
+<p>
+  Once you've signed up with your Github user, you'll see a list of your public repos.
+  To [de]activate credo for a repo, just click on
+  its <strong>On/Off</strong> button.
+</p>
+<p>
+  When a repo is activated, a webhook will be added to that particular
+  repository on Github. Then, each time somebody submits a pull request there,
+  <strong>CredoCI</strong> will check the PR's code with credo and report any
+  warnings as github comments.
+</p>
+<hr />
+<h2>Credo Configuration</h2>
+<p>
+  When <strong>CredoCI</strong> runs credo on your pull request it checks if there's a .credo.config file in your pull request's branch.
+  If there is one then it will use it.
+  In case there is no .credo.config file then the default credo config is used.
+  You can find more info on the format of the .credo.config file on <a target="_blank" href="https://github.com/rrrene/credo#configuration">credo</a> repository.
+</p>

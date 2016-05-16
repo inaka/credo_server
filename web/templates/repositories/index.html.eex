@@ -1,8 +1,12 @@
-<form action="repos/sync" method="GET">
+<form action="/auth/oauth/logout" method="GET" class="repos-btn logout-btn">
+  <button>Log out</button>
+</form>
+<form action="repos/sync" method="GET" class="repos-btn">
   <button id="sync">Sync List</button>
 </form>
 
-<h2>Public Repositories</h2>
+<h1><%= @user.name %>'s repos</h1>
+
 <div class="repos section">
 
   <%= for repo <- @public_repositories do %>

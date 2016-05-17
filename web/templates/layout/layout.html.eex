@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello CredoServer!</title>
+    <title>CredoCI</title>
     <link rel="stylesheet" href="/css/app.css">
   </head>
 
@@ -21,7 +21,7 @@
         </ul>
         <div class="name">
           <h1>CredoCI</h1>
-          <blockquote>You ain't nothing but a hound dog...</blockquote>
+          <blockquote>You focus on logic, we focus on style</blockquote>
         </div>
       </div>
 

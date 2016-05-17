@@ -9,7 +9,7 @@
   "db_connection": {:hex, :db_connection, "0.2.5"},
   "decimal": {:hex, :decimal, "1.1.2"},
   "ecto": {:hex, :ecto, "1.1.6"},
-  "egithub": {:git, "https://github.com/inaka/erlang-github.git", "29687859a9ac6da2d1d41c50defaeb4173e66692", []},
+  "egithub": {:git, "https://github.com/inaka/erlang-github.git", "808ca3707e2cff3386603ebda3b2a26a401b1a32", []},
   "erlware_commons": {:hex, :erlware_commons, "0.13.0"},
   "exactor": {:hex, :exactor, "2.2.0"},
   "excoveralls": {:hex, :excoveralls, "0.5.4"},

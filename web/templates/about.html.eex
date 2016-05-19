@@ -15,14 +15,14 @@
 <p>
   When a repo is activated, a webhook will be added to that particular
   repository on Github. Then, each time somebody submits a pull request there,
-  <strong>CredoCI</strong> will check the PR's code with credo and report any
+  <strong>CredoCI</strong> will check the PR's code with credo and report all
   warnings as github comments.
 </p>
 <hr />
 <h2>Credo Configuration</h2>
 <p>
-  When <strong>CredoCI</strong> runs credo on your pull request it checks if there's a .credo.config file in your pull request's branch.
+  When <strong>CredoCI</strong> runs credo on your pull request it checks if there's a <i>.credo.config</i> file in your pull request's branch.
   If there is one then it will use it.
-  In case there is no .credo.config file then the default credo config is used.
-  You can find more info on the format of the .credo.config file on <a target="_blank" href="https://github.com/rrrene/credo#configuration">credo</a> repository.
+  In case there is no <i>.credo.config</i> file then the default credo config is used.
+  You can find more info on the format of the <i>.credo.config</i> file on <a target="_blank" href="https://github.com/rrrene/credo#configuration">credo</a> repository.
 </p>

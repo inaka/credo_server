@@ -19,6 +19,9 @@
           <li><a href="/about">About</a></li>
           <li><a href="/repos">Repos</a></li>
         </ul>
+        <a href="/">
+          <img src="/img/logo.png" border="0">
+        </a>
         <div class="name">
           <h1>CredoCI</h1>
           <blockquote>You focus on logic, we focus on style</blockquote>

@@ -5,7 +5,7 @@
   <button id="sync">Sync List</button>
 </form>
 
-<h1><%= @user.name %>'s repos</h1>
+<h1><%= @user.name || @user.username %>'s repos</h1>
 
 <div class="repos section">
 

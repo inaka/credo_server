@@ -20,12 +20,12 @@ defmodule CredoServer.User do
     timestamps
   end
 
-  @fields [:name, :username, :github_token,
-           :email, :auth_token, :auth_expires]
+  @optional_fields [:name, :email]
+  @required_fields [:username, :github_token, :auth_token, :auth_expires]
 
   def changeset(user, params \\ :empty) do
     user
-    |> cast(params, @fields, @fields)
+    |> cast(params, @required_fields, @optional_fields)
   end
 
   @doc """

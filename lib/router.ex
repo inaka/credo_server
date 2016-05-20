@@ -5,9 +5,7 @@ defmodule CredoServer.Router do
   import CredoServer.Plug.AddSecretKey
   import CredoServer.Plug.Auth
 
-  alias CredoServer.RepositoriesController
-  alias CredoServer.UsersController
-  alias CredoServer.AuthController
+  alias CredoServer.{RepositoriesController, UsersController, AuthController, AboutController}
   import CredoServer.RouterHelper
 
   plug Plug.Static,
@@ -43,6 +41,10 @@ defmodule CredoServer.Router do
   # Root path
   get "/repos" do
     RepositoriesController.index(conn)
+  end
+
+  get "/about" do
+    AboutController.about(conn)
   end
 
   get "/repos/sync" do

@@ -15,6 +15,10 @@ defmodule CredoServer.Render do
                          "web/templates/layout/layout.html.eex",
                          [:assigns])
 
+  EEx.function_from_file(:def, :about,
+                         "web/templates/about.html.eex",
+                         [:assigns])
+
 
   def render(conn, template_method) do
     conn = assign(conn, :view_template, template_method)

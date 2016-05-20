@@ -1,7 +1,3 @@
-<h2>Credo</h2>
-
-Credo is a style checker for Elixir.
-
 <ol class="steps">
   <li>
     <form action="auth/oauth/login" method="post">
@@ -9,10 +5,10 @@ Credo is a style checker for Elixir.
     </form>
   </li>
   <li>
-    Activate Credo for your GitHub repositories.
+    Activate CredoCI for your GitHub repositories.
   </li>
   <li>
-    When pull requests are created or modified Credo will review your code and
+    When pull requests are created or modified CredoCI will review your code and
     add comments to it.
   </li>
   <li>

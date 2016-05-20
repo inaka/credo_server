@@ -3472,3 +3472,11 @@ button.repo-btn.on{
 .add-remove-hook-form, .steps form{
   display: inline-table;
 }
+
+.repos-btn{
+  float: right;
+}
+
+.logout-btn{
+  padding-left: 5px;
+}

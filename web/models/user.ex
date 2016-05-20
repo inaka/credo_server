@@ -98,7 +98,7 @@ defmodule CredoServer.User do
 
       repo_info = [github_id: repo["id"], name: repo["name"],
                    full_name: repo["full_name"], html_url: repo["html_url"],
-                   status: status]
+                   owner: repo["owner"]["login"], status: status]
       repo = Ecto.build_assoc(user, :repositories, repo_info)
 
       Repo.insert(repo)

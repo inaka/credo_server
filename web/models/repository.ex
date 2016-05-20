@@ -2,6 +2,7 @@ defmodule CredoServer.Repository do
   @moduledoc false
 
   use Ecto.Schema
+  require Logger
   import Ecto.Changeset
   alias CredoServer.{Repo, Repository, User}
 
@@ -9,6 +10,7 @@ defmodule CredoServer.Repository do
     belongs_to :user, CredoServer.User
     field :github_id, :integer
     field :name, :string
+    field :owner, :string
     field :full_name, :string
     field :html_url, :string
     field :private, :boolean, default: false
@@ -17,7 +19,7 @@ defmodule CredoServer.Repository do
     timestamps
   end
 
-  @fields [:github_id, :name, :full_name, :html_url, :private, :status]
+  @fields [:github_id, :name, :full_name, :html_url, :private, :status, :owner]
 
   def changeset(repository, params \\ :empty) do
     repository
@@ -25,7 +27,9 @@ defmodule CredoServer.Repository do
   end
 
   def webhook_status(repository_response, user) do
-    case get_credo_webhook(user, repository_response["name"]) do
+    repo_owner = repository_response["owner"]["login"]
+    repo_name = repository_response["name"]
+    case get_credo_webhook(user, repo_owner, repo_name) do
       nil -> "off"
       _ -> "on"
     end
@@ -33,22 +37,23 @@ defmodule CredoServer.Repository do
 
   def add_webhook(repository, user) do
      client = User.tentacat_client(user)
-     case Tentacat.Hooks.create(user.username, repository.name, new_hook_body, client) do
+     case Tentacat.Hooks.create(repository.owner, repository.name, new_hook_body, client) do
        {201, _} ->
          repo_change = Ecto.Changeset.change(repository, status: "on")
          Repo.update(repo_change)
          :ok
-       _ ->
+       {_, error} ->
+         Logger.error("There was an error adding the webhook" <> inspect error)
          :error
      end
   end
 
   def remove_webhook(repository, user) do
-    credo_webhook = get_credo_webhook(user, repository.name)
+    credo_webhook = get_credo_webhook(user, repository.owner, repository.name)
 
     if credo_webhook do
       client = User.tentacat_client(user)
-      Tentacat.Hooks.remove(user.username, repository.name, credo_webhook["id"], client)
+      Tentacat.Hooks.remove(repository.owner, repository.name, credo_webhook["id"], client)
       repo_change = Ecto.Changeset.change(repository, status: "off")
       Repo.update(repo_change)
     end
@@ -68,16 +73,16 @@ defmodule CredoServer.Repository do
 
   # Private
 
-  defp get_credo_webhook(user, repository_name) do
-    hooks = webhooks(user, repository_name)
+  defp get_credo_webhook(user, repository_owner, repository_name) do
+    hooks = webhooks(user, repository_owner, repository_name)
     Enum.find(hooks, fn(hook) ->
       hook["config"]["url"] == Application.get_env(:credo_server, :webhook_url)
     end)
   end
 
-  defp webhooks(user, repository_name) do
+  defp webhooks(user, repository_owner, repository_name) do
     client = User.tentacat_client(user)
-    case Tentacat.Hooks.list(user.username, repository_name, client) do
+    case Tentacat.Hooks.list(repository_owner, repository_name, client) do
       hooks when is_list(hooks) ->
         hooks
       _ ->

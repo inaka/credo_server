@@ -46,7 +46,7 @@ defmodule CredoServer.RepositoriesControllerTest do
       repo_info = [github_id: 56711785, name: "credo_test",
                    full_name: "alemata/credo_test",
                    html_url: "https://github.com/alemata/credo_test",
-                   status: "off"]
+                   owner: "alemata", status: "off"]
       repo_info = Ecto.build_assoc(user, :repositories, repo_info)
 
       {:ok, repo} = Repo.insert(repo_info)
@@ -69,7 +69,7 @@ defmodule CredoServer.RepositoriesControllerTest do
       repo_info = [github_id: 56711785, name: "credo_test",
                    full_name: "alemata/credo_test",
                    html_url: "https://github.com/alemata/credo_test",
-                   status: "off"]
+                   owner: "alemata", status: "off"]
       repo_info = Ecto.build_assoc(user, :repositories, repo_info)
 
       {:ok, repo} = Repo.insert(repo_info)
@@ -92,7 +92,7 @@ defmodule CredoServer.RepositoriesControllerTest do
       repo_info = [github_id: 56711785, name: "credo_test",
                    full_name: "alemata/credo_test",
                    html_url: "https://github.com/alemata/credo_test",
-                   status: "on"]
+                   owner: "alemata", status: "on"]
       repo_info = Ecto.build_assoc(user, :repositories, repo_info)
 
       {:ok, repo} = Repo.insert(repo_info)
@@ -114,7 +114,7 @@ defmodule CredoServer.RepositoriesControllerTest do
     repo_info = [github_id: 56711785, name: "credo_test",
                  full_name: "alemata/credo_test",
                  html_url: "https://github.com/alemata/credo_test",
-                 status: "on"]
+                 owner: "alemata", status: "on"]
     repo_info = Ecto.build_assoc(user, :repositories, repo_info)
 
     {:ok, _repo} = Repo.insert(repo_info)

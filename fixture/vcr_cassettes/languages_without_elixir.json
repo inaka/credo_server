@@ -1,0 +1,41 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.github.com/repos/inaka/elvis/languages"
+    },
+    "response": {
+      "body": "{\"Erlang\":33956,\"JavaScript\":24185,\"Makefile\":1777}",
+      "headers": {
+        "Server": "GitHub.com",
+        "Date": "Tue, 24 May 2016 17:03:01 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "51",
+        "Status": "200 OK",
+        "X-RateLimit-Limit": "60",
+        "X-RateLimit-Remaining": "58",
+        "X-RateLimit-Reset": "1464112981",
+        "Cache-Control": "public, max-age=60, s-maxage=60",
+        "Vary": "Accept",
+        "ETag": "\"01abfe6b19537f30880b0bf8ba5f1fcb\"",
+        "Last-Modified": "Tue, 24 May 2016 14:08:03 GMT",
+        "X-GitHub-Media-Type": "github.v3; format=json",
+        "Access-Control-Expose-Headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Security-Policy": "default-src 'none'",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains; preload",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "deny",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Served-By": "13d09b732ebe76f892093130dc088652",
+        "X-GitHub-Request-Id": "BEBFE64E:1C0C6:107EA249:57448945"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

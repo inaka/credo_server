@@ -71,6 +71,26 @@ defmodule CredoServer.Repository do
     Repo.preload(repository, [:user])
   end
 
+  def public_and_admin_filter(repository_info) do
+    not repository_info["private"] and repository_info["permissions"]["admin"]
+  end
+
+  def elixir_repo_filter(%{"language" => "Elixir"}) do
+    true
+  end
+  def elixir_repo_filter(%{"language" => nil}) do
+    true
+  end
+  def elixir_repo_filter(repository_info) do
+    case HTTPoison.get(repository_info["languages_url"]) do
+      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+        {:ok, response} = Poison.decode(body)
+        Map.has_key?(response, "Elixir")
+      _ ->
+        false
+    end
+  end
+
   # Private
 
   defp get_credo_webhook(user, repository_owner, repository_name) do

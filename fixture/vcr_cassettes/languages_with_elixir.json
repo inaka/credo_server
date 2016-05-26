@@ -1,0 +1,41 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.github.com/repos/inaka/dayron/languages"
+    },
+    "response": {
+      "body": "{\"Elixir\":72209}",
+      "headers": {
+        "Server": "GitHub.com",
+        "Date": "Tue, 24 May 2016 17:03:01 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "16",
+        "Status": "200 OK",
+        "X-RateLimit-Limit": "60",
+        "X-RateLimit-Remaining": "59",
+        "X-RateLimit-Reset": "1464112981",
+        "Cache-Control": "public, max-age=60, s-maxage=60",
+        "Vary": "Accept",
+        "ETag": "\"4947c1325994306d833b531e1dea337e\"",
+        "Last-Modified": "Mon, 23 May 2016 16:48:35 GMT",
+        "X-GitHub-Media-Type": "github.v3; format=json",
+        "Access-Control-Expose-Headers": "ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Security-Policy": "default-src 'none'",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains; preload",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "deny",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Served-By": "76d9828c7e4f1d910f7ba069e90ce976",
+        "X-GitHub-Request-Id": "BEBFE64E:1C0C6:107EA148:57448944"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/inaka/credo_server.svg?branch=master)](https://travis-ci.org/inaka/credo_server)
 [![Coverage Status](https://coveralls.io/repos/github/inaka/credo_server/badge.svg?branch=master)](https://coveralls.io/github/inaka/credo_server?branch=master)
+[![Deps Status](https://beta.hexfaktor.org/badge/all/github/inaka/credo_server.svg)](https://beta.hexfaktor.org/github/inaka/credo_server)
 
 Server for running Credo on Github Pull Requests.
 

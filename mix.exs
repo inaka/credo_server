@@ -43,10 +43,10 @@ defmodule CredoServer.Mixfile do
      {:tentacat, "~> 0.2"},
      {:secure_random, "~> 0.2"},
      {:credo, "~> 0.3"},
-     {:egithub, github: "inaka/erlang-github"},
+     {:egithub, "~> 0.2.6"},
      {:excoveralls, "~> 0.4", only: :test},
      {:exvcr, "~> 0.7", only: :test},
-     {:exrm, "~> 0.18.1"}
+     {:exrm, "~> 1.0.5"}
    ]
   end
 

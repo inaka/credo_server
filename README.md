@@ -1,5 +1,7 @@
 # CredoServer
 
+[![Build Status](https://travis-ci.org/inaka/credo_server.svg?branch=master)](https://travis-ci.org/inaka/credo_server)
+
 Server for running Credo on Github Pull Requests.
 
 To start your app:

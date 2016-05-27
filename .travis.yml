@@ -4,5 +4,5 @@ elixir:
 otp_release:
   - 18.2.1
 env:
-  - MIX_ENV=test
+  - MIX_ENV=test TMPDIR=./
 script: mix coveralls.travis

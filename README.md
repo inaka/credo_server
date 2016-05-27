@@ -1,6 +1,7 @@
 # CredoServer
 
 [![Build Status](https://travis-ci.org/inaka/credo_server.svg?branch=master)](https://travis-ci.org/inaka/credo_server)
+[![Coverage Status](https://coveralls.io/repos/github/inaka/credo_server/badge.svg?branch=master)](https://coveralls.io/github/inaka/credo_server?branch=master)
 
 Server for running Credo on Github Pull Requests.
 

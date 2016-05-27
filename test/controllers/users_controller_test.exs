@@ -1,9 +1,14 @@
 defmodule CredoServer.UsersControllerTest do
   use Plug.Test
   alias CredoServer.{Router, Repo, User, TestUtils}
-  use ExUnit.Case, async: true
+  use ExUnit.Case, async: false
 
   @router_opts Router.init([])
+
+  setup do
+    Ecto.Adapters.SQL.restart_test_transaction(CredoServer.Repo)
+    :ok
+  end
 
   test "active users returns number of active users" do
     user = TestUtils.create_user()

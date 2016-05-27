@@ -6,10 +6,13 @@
 
 Server for running Credo on Github Pull Requests.
 
-To start your app:
+To start your own server:
 
-  1. Install dependencies with `mix deps.get`
-  2. Start app with `iex -S mix`
+  1. You need to set all environment variables needed. See [dev.exs](https://github.com/inaka/credo_server/blob/master/config/dev.exs)
+  2. Install dependencies with `mix deps.get`
+  3. Create database with `mix ecto.create`
+  4. Run migrations with `mix ecto.migrate`
+  5. Start app with `iex -S mix`
 
 ## Contact Us
 

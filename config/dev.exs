@@ -16,5 +16,7 @@ config :credo_server, :github_user, System.get_env("GITHUB_USER")
 config :credo_server, :github_password, System.get_env("GITHUB_PASSWORD")
 config :credo_server, :webhook_url, System.get_env("WEBHOOK_URL")
 config :credo_server, :secret_key_base, System.get_env("SECRET_KEY_BASE")
+config :credo_server, :session_signing_salt, System.get_env("SESSION_SIGNING_SALT")
+config :credo_server, :session_encryption_salt, System.get_env("SESSION_ENCRYPTION_SALT")
 config :credo_server, :egithub, :egithub
 config :credo_server, :egithub_webhook, :egithub_webhook

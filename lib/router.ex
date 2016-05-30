@@ -24,8 +24,8 @@ defmodule CredoServer.Router do
   plug Plug.Session,
     store: :cookie,
     key: "_credo_server_key",
-    signing_salt: "Jk7pxAMf",
-    encryption_salt: "Jk7pxAMf"
+    signing_salt: Application.get_env(:credo_server, :session_signing_salt),
+    encryption_salt: Application.get_env(:credo_server, :session_encryption_salt)
 
   plug :add_secret_key
   plug :fetch_session

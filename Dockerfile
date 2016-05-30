@@ -32,6 +32,5 @@ COPY . /myapp
 
 RUN mix deps.get
 RUN MIX_ENV=prod mix compile 
-#RUN deps.compile
 RUN mix release
 COPY build/credo.monit.conf /etc/monit/conf.d/credo.conf

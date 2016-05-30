@@ -10,14 +10,19 @@ cd otp_src_18.2.1
 make
 make install
 
-
 ## INSTALL REBAR
-cd /tmp
-git clone git://github.com/rebar/rebar.git
-cd rebar
-./bootstrap
-mv rebar /usr/local/bin/
+# cd /tmp
+# git clone git://github.com/rebar/rebar.git
+# cd rebar
+# ./bootstrap
+# mv rebar /usr/local/bin/
 chmod +x /usr/local/bin/rebar
+
+## INSTALL REBAR3
+cd /tmp
+wget https://github.com/erlang/rebar3/releases/download/3.1.1/rebar3
+cp rebar3 /usr/local/bin/
+chmod +x /usr/local/bin/rebar3
 
 
 ## INSTALL ELIXIR

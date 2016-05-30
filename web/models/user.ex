@@ -11,7 +11,6 @@ defmodule CredoServer.User do
     field :username, :string
     field :github_token, :string
     field :email, :string
-    field :email_code, :string
     field :auth_token, :string
     field :auth_expires, Ecto.DateTime
     field :synced_at, Ecto.DateTime

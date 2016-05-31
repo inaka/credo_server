@@ -49,10 +49,4 @@ defmodule CredoServer.Mixfile do
      {:exrm, "~> 1.0.5"}
    ]
   end
-
-  defp description do
-    """
-    This is a service to check public github PRs with credo syntax tool
-    """
-  end
 end

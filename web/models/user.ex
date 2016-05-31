@@ -149,9 +149,12 @@ defmodule CredoServer.User do
     SecureRandom.uuid
   end
 
+  # Get tomorrow as the new expiration date
   defp new_expiration_date do
-    now = Ecto.DateTime.utc
-    %Ecto.DateTime{day: now.day + 1, hour: now.hour, min: now.min,
-                   month: now.month, sec: now.sec, year: now.year}
+    :calendar.universal_time
+    |> :calendar.datetime_to_gregorian_seconds
+    |> +(60 * 60 * 24)
+    |> :calendar.gregorian_seconds_to_datetime
+    |> Ecto.DateTime.from_erl
   end
 end

@@ -21,8 +21,8 @@
 <hr />
 <h2>Credo Configuration</h2>
 <p>
-  When <strong>CredoCI</strong> runs credo on your pull request it checks if there's a <i>.credo.config</i> file in your pull request's branch.
-  If there is one then it will use it.
-  In case there is no <i>.credo.config</i> file then the default credo config is used.
+  When <strong>CredoCI</strong> runs credo on your pull request it checks if there's a <i>.credo.config</i> file in your pull request's branch,
+  containing a config with name <i>'default'</i>.<br>
+  If there is one then it will use it. Otherwise, the default credo config is used.
   You can find more info on the format of the <i>.credo.config</i> file on <a target="_blank" href="https://github.com/rrrene/credo#configuration">credo</a> repository.
 </p>

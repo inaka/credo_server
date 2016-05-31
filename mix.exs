@@ -42,7 +42,7 @@ defmodule CredoServer.Mixfile do
      {:ecto, "~> 1.1.5"},
      {:tentacat, "~> 0.2"},
      {:secure_random, "~> 0.2"},
-     {:credo, "~> 0.3"},
+     {:credo, git: "https://github.com/rrrene/credo", tag: "release-0.4.0"},
      {:egithub, "~> 0.2.6"},
      {:excoveralls, "~> 0.4", only: :test},
      {:exvcr, "~> 0.7", only: :test},

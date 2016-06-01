@@ -27,7 +27,7 @@ defmodule CredoServer.CredoWebhook do
   defp run_credo(cred, repository_info, github_file) do
     file_path = FileUtils.create_content_file(cred, repository_info, github_file)
 
-    config = Credo.Config.read_or_default(file_path)
+    config = Credo.Config.read_or_default(file_path, "default", true)
     case Credo.CLI.Command.Suggest.run(file_path, config) do
       {:error, errors} ->
         create_github_errors_messages(errors, github_file)

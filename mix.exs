@@ -42,8 +42,7 @@ defmodule CredoServer.Mixfile do
      {:ecto, "~> 1.1.5"},
      {:tentacat, "~> 0.2"},
      {:secure_random, "~> 0.2"},
-     # Using this as credo release-0.4.0 has breacking config changes and we need some changes.
-     {:credo, git: "https://github.com/inaka/credo", tag: "0.3.14"},
+     {:credo, "~> 0.4"},
      {:egithub, "~> 0.2.6"},
      {:excoveralls, "~> 0.4", only: :test},
      {:exvcr, "~> 0.7", only: :test},

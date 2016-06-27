@@ -37,16 +37,20 @@ defmodule CredoServer.CredoWebhook do
   end
 
   defp create_github_errors_messages(errors, github_file) do
-    Enum.flat_map(errors, fn(error) ->
-      patch = github_file["patch"]
-      case GithubUtils.get_relative_position(patch, error.line_no) do
-        {:ok, relative_position} ->
-          [%{commit_id: GithubUtils.commit_id(github_file),
-             path: github_file["filename"], position: relative_position,
-             text: error.message}]
-        :not_found ->
-          []
-      end
-    end)
+    errors
+    |> Enum.uniq
+    |> Enum.flat_map(&create_github_error(&1, github_file))
+  end
+
+  defp create_github_error(error, github_file) do
+    patch = github_file["patch"]
+    case GithubUtils.get_relative_position(patch, error.line_no) do
+      {:ok, relative_position} ->
+        [%{commit_id: GithubUtils.commit_id(github_file),
+           path: github_file["filename"], position: relative_position,
+           text: error.message}]
+      :not_found ->
+        []
+    end
   end
 end

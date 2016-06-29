@@ -16,7 +16,7 @@ defmodule CredoServer.FileUtils do
     {:ok, content} = GithubUtils.file_content(cred, repository,
                                               commit_id, filename)
 
-    repository_path = create_repository_dir(repository_info)
+    repository_path = get_repository_path(repository_info)
     file_path = "#{repository_path}/#{filename}"
     File.mkdir_p(Path.dirname(file_path))
     File.write(file_path, content)

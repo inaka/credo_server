@@ -24,14 +24,14 @@ defmodule CredoServer.FileUtilsTests do
   "sha" => "c1f12c512b6ec76c58e7cdc97b9c5111d3eff8a0", "status" => "modified"}
 
   test "create repository dir" do
-    repository_dir = FileUtils.create_repository_dir(@repository_info)
+    repository_dir = FileUtils.create_repository_dir(@repository_info["full_name"])
     assert File.exists?(repository_dir)
   end
 
   test "create content file" do
     cred = GithubUtils.basic_auth()
-    repository_path = FileUtils.create_repository_dir(@repository_info)
-    FileUtils.create_content_file(cred, @repository_info, @github_file)
+    repository_path = FileUtils.create_repository_dir(@repository_info["full_name"])
+    FileUtils.create_content_file(cred, @repository_info["full_name"], repository_path, @github_file)
     path = "#{repository_path}/lib/another_file.ex"
     assert File.exists?(path)
     assert File.read!(path) == File.read!("test/file_example.exs")
@@ -41,7 +41,7 @@ defmodule CredoServer.FileUtilsTests do
     pr_data = %{"pull_request" => %{"head" => %{"ref" => "branch"}},
                 "repository" => @repository_info}
     cred = GithubUtils.basic_auth()
-    repository_path = FileUtils.create_repository_dir(@repository_info)
+    repository_path = FileUtils.create_repository_dir(@repository_info["full_name"])
     FileUtils.add_repository_credo_config(cred, pr_data, repository_path)
     path = "#{repository_path}/.credo.exs"
     assert File.exists?(path)
@@ -49,7 +49,7 @@ defmodule CredoServer.FileUtilsTests do
   end
 
   test "delete repository path" do
-    repository_dir = FileUtils.create_repository_dir(@repository_info)
+    repository_dir = FileUtils.create_repository_dir(@repository_info["full_name"])
     assert File.exists?(repository_dir)
     FileUtils.delete_repository_dir(repository_dir)
     refute File.exists?(repository_dir)

@@ -5,12 +5,12 @@ defmodule CredoServer.CredoWebhook do
   alias CredoServer.FileUtils
 
   def handle_pull_request(cred, pr_data, github_files) do
-    repository_info = pr_data["repository"]
-    repository_path = FileUtils.create_repository_dir(repository_info)
+    repository_name = pr_data["repository"]["full_name"]
+    repository_path = FileUtils.create_repository_dir(repository_name)
     FileUtils.add_repository_credo_config(cred, pr_data, repository_path)
 
     #Add all pr's files to the repository
-    add_pr_files(cred, repository_info, github_files)
+    add_pr_files(cred, repository_name, repository_path, github_files)
     #Run credo on the repository
     errors = run_credo(cred, repository_path, github_files)
 
@@ -21,13 +21,13 @@ defmodule CredoServer.CredoWebhook do
 
   # Private
 
-  defp add_pr_files(cred, repository_info, github_files) do
+  defp add_pr_files(cred, repository_name, repository_path, github_files) do
     github_files
-    |> Enum.map(&add_pr_file(cred, repository_info, &1))
+    |> Enum.map(&add_pr_file(cred, repository_name, repository_path,  &1))
   end
 
-  defp add_pr_file(cred, repository_info, github_file) do
-    FileUtils.create_content_file(cred, repository_info, github_file)
+  defp add_pr_file(cred, repository_name, repository_path, github_file) do
+    FileUtils.create_content_file(cred, repository_name, repository_path, github_file)
   end
 
   # Run credo on the repository, which only has pr's files.

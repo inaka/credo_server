@@ -9,14 +9,12 @@ defmodule CredoServer.FileUtils do
     path
   end
 
-  def create_content_file(cred, repository_info, github_file) do
+  def create_content_file(cred, repository_name, repository_path,  github_file) do
     commit_id = GithubUtils.commit_id(github_file)
-    repository = repository_info["full_name"]
     filename = github_file["filename"]
-    {:ok, content} = GithubUtils.file_content(cred, repository,
+    {:ok, content} = GithubUtils.file_content(cred, repository_name,
                                               commit_id, filename)
 
-    repository_path = create_repository_dir(repository_info)
     file_path = "#{repository_path}/#{filename}"
     File.mkdir_p(Path.dirname(file_path))
     File.write(file_path, content)
@@ -42,8 +40,8 @@ defmodule CredoServer.FileUtils do
     File.rm_rf(path)
   end
 
-  defp get_repository_path(repository_info) do
-    repository = repository_info["full_name"]
-    System.tmp_dir <> repository
+  defp get_repository_path(repository_name) do
+    random = SecureRandom.urlsafe_base64(6)
+    "#{System.tmp_dir}#{random}/#{repository_name}"
   end
 end

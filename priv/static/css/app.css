@@ -435,8 +435,15 @@ div.content_center {
   margin-left: -13px;
   float: left;
   }
-#footer {
-  margin-bottom: 100px;
+#content #footer {
+  height: 53px;
+  border-top: 1px #999 solid;
+  line-height: 53px;
+  margin-top: 20px;
+  }
+
+#content #footer img {
+  float: right;
   }
 
 /** Header Elements **/

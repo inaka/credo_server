@@ -29,6 +29,7 @@ chmod +x /usr/local/bin/rebar3
 cd /tmp
 git clone https://github.com/elixir-lang/elixir.git
 cd elixir
+git checkout v1.3.0
 make clean install
 
 ## Elixir mix setup

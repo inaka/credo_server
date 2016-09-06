@@ -1,17 +1,20 @@
 FROM debian:jessie
 
-RUN apt-get -y update
-RUN apt-get -y dist-upgrade
-RUN apt-get install -y build-essential \
-libncurses5-dev \
-openssl \
-monit \
-libssl-dev \
-wget \
-git \
-postgresql-client \
-debconf \
-locales
+RUN apt-get clean &&\
+    apt-get -y update &&\
+    apt-get clean &&\
+    apt-get -y dist-upgrade &&\
+    apt-get clean &&\
+    apt-get install -y build-essential \
+    libncurses5-dev \
+    openssl \
+    monit \
+    libssl-dev \
+    wget \
+    git \
+    postgresql-client \
+    debconf \
+    locales
 
 # Set the locale
 ENV DEBIAN_FRONTEND noninteractive
